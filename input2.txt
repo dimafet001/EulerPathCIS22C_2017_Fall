@@ -1,0 +1,8 @@
+San Jose (SJC),Las Vegas(LAX)
+Las Vegas(LAX),San Francisco(SFO)
+San Francisco(SFO),Boston(BOS)
+Boston(BOS),West Palm Beach(PBI)
+West Palm Beach(PBI),New York(JFK)
+New York(JFK),Salt Lake City(SLC)
+Salt Lake City(SLC),Phoenix(PHX)
+Phoenix(PHX),Seattle-Tacoma (SEA)
