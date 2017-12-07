@@ -1,8 +1,8 @@
-San Jose (SJC),Las Vegas(LAX)
-Las Vegas(LAX),San Francisco(SFO)
-San Francisco(SFO),Boston(BOS)
-Boston(BOS),West Palm Beach(PBI)
-West Palm Beach(PBI),New York(JFK)
-New York(JFK),Salt Lake City(SLC)
-Salt Lake City(SLC),Phoenix(PHX)
-Phoenix(PHX),Seattle-Tacoma (SEA)
+San Jose (SJC),Las Vegas(LAX),8.0
+Las Vegas(LAX),San Francisco(SFO),10.0
+San Francisco(SFO),Boston(BOS),36.0
+Boston(BOS),West Palm Beach(PBI),28.0
+West Palm Beach(PBI),New York(JFK),20.0
+New York(JFK),Salt Lake City(SLC),35.0
+Salt Lake City(SLC),Phoenix(PHX),20.0
+Phoenix(PHX),Seattle-Tacoma (SEA),12.0
