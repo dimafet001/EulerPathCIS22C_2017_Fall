@@ -25,7 +25,7 @@ public class Driver {
 			String line = s.nextLine();//get next line
 			String[] temp = line.split(",");
 			path.addEdge(temp[0], temp[1]);
-			path.numberOfVertices ++;
+			//path.numberOfVertices ++;
 		}
 		
 	}
