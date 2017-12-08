@@ -1,3 +1,4 @@
+9
 New York(JFK),West Palm Beach(PBI),5.0
 West Palm Beach(PBI),Phoenix(PHX),16.0
 Phoenix(PHX),New York(JFK),18.0
