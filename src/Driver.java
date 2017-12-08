@@ -1,3 +1,7 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
 import graphFiles.Graph;
 
 public class Driver {
@@ -5,16 +9,15 @@ public class Driver {
 	//Shiyu, Zhang
 	public static void main(String[] args)
 	 {
-		 Scanner fileScanner = OpenInputFile();
-		 EulerGraph<String> flightPath;
+		 Scanner fileScanner = openInputFile();
+		 EulerGraph/*<String>*/ flightPath;
 		 if(fileScanner==null){
 			System.out.println("Unable to open the input file, ending program");
 			return;
-		}
-		else{
-			flightPath = new EulerGraph<String>();
+		 } else{
+			flightPath = new EulerGraph();//<String>
 			fillPath(fileScanner,flightPath); 
-		}
+		 }
 	 }
 	 //Shiyu, Zhang
 	public static void fillPath(Scanner s,EulerGraph<String> path) {
@@ -27,7 +30,7 @@ public class Driver {
 		
 	}
 	//Shiyu, Zhang
-	public static Scanner OpenInputFile() {
+	public static Scanner openInputFile() {
 		String filename = null;
 		Scanner temp = null;
 		System.out.print("\nPlease enter the input file name: ");
@@ -42,10 +45,14 @@ public class Driver {
 		}
 		return temp;
 	}
-/*
+
 	public static void main(String[] args) {
 		Graph<String> myGraph1 = new Graph<String>();
-		myGraph1.addEdge("A", "B", 0);
+		
+		// read the data and get index map of values
+		
+		
+		myGraph1.addEdge("A", "B");
 		myGraph1.addEdge("A", "C", 0);
 		myGraph1.addEdge("A", "D", 0);
 		myGraph1.addEdge("B", "E", 0);
@@ -62,5 +69,11 @@ public class Driver {
 
 		myGraph1.showAdjTable();
 	}
-*/
+
+	public static void readMethod(Scanner s) {
+		
+		
+		
+	}
+	
 }

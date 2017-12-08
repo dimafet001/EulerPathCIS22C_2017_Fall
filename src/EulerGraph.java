@@ -1,6 +1,9 @@
+import java.io.PrintWriter;
 import java.util.*;
-import java.util.LinkedList;
+import java.util.Map.Entry;
+
 import graphFiles.Graph;
+import graphFiles.Vertex;
 
 
 // author Dongbo Liu + Dolgopolov Dmitry 
@@ -138,6 +141,18 @@ public class EulerGraph extends Graph {
 	public void findEulerPath() { //find Euler path using fleury algorithm
 		
 		
+	}
+	
+	public void outputToFile(PrintWriter pw) {
+		
+		Iterator<Entry<E, Vertex<E>>> iter;
+	      
+		System.out.println( "------------------------ ");
+		iter = vertexSet.entrySet().iterator();
+		while( iter.hasNext() ) {
+			(iter.next().getValue()).showAdjList();
+		}
+		System.out.println();
 	}
 	
 }
