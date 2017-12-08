@@ -1,9 +1,9 @@
 import graphFiles.Graph;
-
-public class Driver {
+//Shiyu Zhang
+public class Driver {	
 	public static Scanner userScanner = new Scanner(System.in);
-	//Shiyu, Zhang
-	public static void main(String[] args)
+	
+	 public static void main(String[] args)
 	 {
 		 Scanner fileScanner = OpenInputFile();
 		 EulerGraph<String> flightPath;
@@ -12,21 +12,24 @@ public class Driver {
 			return;
 		}
 		else{
-			flightPath = new EulerGraph<String>();
+			int NumVert = fileScanner.nextInt();
+			flightPath = new EulerGraph<String>(NumVert);
 			fillPath(fileScanner,flightPath); 
+			
 		}
 	 }
-	 //Shiyu, Zhang
-	public static void fillPath(Scanner s,EulerGraph<String> path) {
+	 
+	 static void fillPath(Scanner s,EulerGraph<String> path) {
+		 s.nextLine();
 		while(s.hasNext()){
 			String line = s.nextLine();//get next line
 			String[] temp = line.split(",");
-			path.addEdges(temp[0], temp[1]);
+			path.addEdge(temp[0], temp[1]);
 			path.numberOfVertices ++;
 		}
 		
 	}
-	//Shiyu, Zhang
+
 	public static Scanner OpenInputFile() {
 		String filename = null;
 		Scanner temp = null;
