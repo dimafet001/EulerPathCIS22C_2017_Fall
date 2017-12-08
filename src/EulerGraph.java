@@ -3,7 +3,6 @@ import java.util.*;
 import java.util.Map.Entry;
 
 import graphFiles.Graph;
-import graphFiles.Vertex;
 
 
 // author Dongbo Liu + Dolgopolov Dmitry 
@@ -11,6 +10,7 @@ import graphFiles.Vertex;
 public class EulerGraph extends Graph {
 	private int numberOfVertices;
 	private LinkedList<Integer> adjacencyMatrix[];
+	
 	
 	// undo part -----------------
 	
@@ -59,14 +59,14 @@ public class EulerGraph extends Graph {
 	
 	// just can undo the last step. Nothing more;
 	void undo() {
-
+// TODO: implement the stack
 		// if we added we remove and viceversa
 		if (lastOperation == operation.ADDED) {
-			adjacencyMatrix[lastV].remove(lastW);
-			adjacencyMatrix[lastW].remove(lastV);
+			adjacencyMatrix[lastV].remove(lastW-1);
+			adjacencyMatrix[lastW].remove(lastV-3);
 		} else if (lastOperation == operation.REMOVED) {
-			adjacencyMatrix[lastV].add(lastW);
-			adjacencyMatrix[lastW].add(lastV);
+			adjacencyMatrix[lastV].add(lastW-1);
+			adjacencyMatrix[lastW].add(lastV-3);
 		}
 		
 		lastOperation = operation.NONE; // because we cannot undo more than one step
@@ -76,7 +76,7 @@ public class EulerGraph extends Graph {
 	void DFSUtil(int v, boolean visited[]) {
 		// Mark the current node as visited
 		visited[v] = true;
-
+		// TODO: display the solution and have an option of saving it to the file
 		// Recur for all the vertices adjacent to this vertex
 		Iterator<Integer> i = adjacencyMatrix[v].listIterator();
 		while (i.hasNext()) {
@@ -113,7 +113,7 @@ public class EulerGraph extends Graph {
 			if (visited[i] == false && adjacencyMatrix[i].size() > 0) {
 				return false;
 			}
-		}
+		}// TODO: store the solution to a Stack
 		return true;
 	}
 
@@ -143,16 +143,63 @@ public class EulerGraph extends Graph {
 		
 	}
 	
+	// TODO: be able to call it from menu
 	public void outputToFile(PrintWriter pw) {
 		
-		Iterator<Entry<E, Vertex<E>>> iter;
-	      
-		System.out.println( "------------------------ ");
-		iter = vertexSet.entrySet().iterator();
-		while( iter.hasNext() ) {
-			(iter.next().getValue()).showAdjList();
+		for (int i = 0; i < numberOfVertices; i++) {
+			
+			pw.println( "Adj List for " + indexToName.get(i) + ": ");
+			
+			for (int j = 0; j < adjacencyMatrix[i].size(); j++) {
+				pw.print( indexToName.get("\t" + adjacencyMatrix[i].get(j)));
+			}
 		}
-		System.out.println();
 	}
 	
+	public void showAdjTable() {
+		for (int i = 0; i < numberOfVertices; i++) {
+			
+			System.out.println( "Adj List for " + indexToName.get(i) + ": ");
+//			System.out.println( "Adj List for " + i + ": ");
+			
+			for (int j = 0; j < adjacencyMatrix[i].size(); j++) {
+				System.out.print( "\n\t" + indexToName.get(adjacencyMatrix[i].get(j)));
+//				System.out.print( "\n\t" + adjacencyMatrix[i].get(j));
+			} // Bad coz it should be generic
+			
+			System.out.println();
+		}
+	}
+	
+	/* Iterator<Entry<E, Pair<Vertex<E>, Double>>> iter ;
+	   Entry<E, Pair<Vertex<E>, Double>> entry;
+	   Pair<Vertex<E>, Double> pair;
+	
+	   System.out.print( "Adj List for " + data + ": ");
+	   iter = adjList.entrySet().iterator();
+	   while( iter.hasNext() )
+	   {
+	      entry = iter.next();
+	      pair = entry.getValue();
+	      System.out.print( pair.first.data + "("
+	         + String.format("%3.1f", pair.second)
+	         + ") " );
+	   }
+	   System.out.println();*/
+	
+	
+	
+	
+	private Map<Integer, String> indexToName;
+	
+	public void setIndexToName(Map<Integer, String> map) {
+		indexToName = map;
+	}
+	
+	public void printIndexToName() {
+		
+		for (int i = 0; i < numberOfVertices; i++) {
+			System.out.println("Index " + i + ": " + indexToName.get(i));	
+		}
+	}
 }
