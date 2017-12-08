@@ -1,7 +1,48 @@
 import graphFiles.Graph;
 
 public class Driver {
-
+	public static Scanner userScanner = new Scanner(System.in);
+	//Shiyu, Zhang
+	public static void main(String[] args)
+	 {
+		 Scanner fileScanner = OpenInputFile();
+		 EulerGraph<String> flightPath;
+		 if(fileScanner==null){
+			System.out.println("Unable to open the input file, ending program");
+			return;
+		}
+		else{
+			flightPath = new EulerGraph<String>();
+			fillPath(fileScanner,flightPath); 
+		}
+	 }
+	 //Shiyu, Zhang
+	public static void fillPath(Scanner s,EulerGraph<String> path) {
+		while(s.hasNext()){
+			String line = s.nextLine();//get next line
+			String[] temp = line.split(",");
+			path.addEdges(temp[0], temp[1]);
+			path.numberOfVertices ++;
+		}
+		
+	}
+	//Shiyu, Zhang
+	public static Scanner OpenInputFile() {
+		String filename = null;
+		Scanner temp = null;
+		System.out.print("\nPlease enter the input file name: ");
+		filename = userScanner.nextLine();
+		File inputFile = new File(filename);
+		try{
+			temp = new Scanner(inputFile);
+		}
+		catch(FileNotFoundException e){
+			System.out.println(e.getMessage());
+			return null;
+		}
+		return temp;
+	}
+/*
 	public static void main(String[] args) {
 		Graph<String> myGraph1 = new Graph<String>();
 		myGraph1.addEdge("A", "B", 0);
@@ -21,5 +62,5 @@ public class Driver {
 
 		myGraph1.showAdjTable();
 	}
-
+*/
 }
