@@ -106,6 +106,7 @@ public class Driver {
 		while (s.hasNext()) {
 			String line = s.nextLine();// get next line
 			String[] temp = line.split(",");
+<<<<<<< HEAD
 			int air1 = -1, air2 = -1; // index of the airport;
 
 			// we change string to int
@@ -127,6 +128,10 @@ public class Driver {
 
 			path.addEdge(air1 == -1 ? airportIndexNameToIndex.get(temp[0]) : air1,
 					air2 == -1 ? airportIndexNameToIndex.get(temp[1]) : air2);
+=======
+			path.addEdge(temp[0], temp[1]);
+			//path.numberOfVertices ++;
+>>>>>>> 5fcaa03e3738918d028e0752c053df6049c2424f
 		}
 
 		path.setIndexToName(airportIndex);
