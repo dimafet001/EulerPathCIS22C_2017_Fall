@@ -1,13 +1,13 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.HashMap;
 import java.util.InputMismatchException;
-import java.util.Map;
 import java.util.Scanner;
 
-import graphFiles.Graph;
-
-//Shiyu Zhang
+/**
+ * @author Dmitry Dolgopolov (main and EulerGraph work), Shiyu Zhang (data part and files), 
+ * 			Mher Torjyan (menu and Graph work)
+ *
+ */
 public class Driver {
 	public static Scanner userScanner = new Scanner(System.in);
 

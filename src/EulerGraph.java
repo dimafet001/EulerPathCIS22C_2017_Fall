@@ -1,10 +1,7 @@
-import java.io.PrintWriter;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Stack;
 
 import graphFiles.Graph;
-import graphFiles.LinkedQueue;
 
 // author Dongbo Liu + Dolgopolov Dmitry 
 
@@ -63,7 +60,7 @@ public class EulerGraph<E> extends Graph<E> {
 		// we delete the last step from the Queue
 		// at the same time we save it into the object
 		// so we can still use it
-		Step<E> lastStep = steps.dequeue();
+		Step<E> lastStep = steps.pop();
 		
 		// if we added we remove and viceversa
 		if (lastStep.getOperation() == Operation.ADDED)
