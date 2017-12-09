@@ -143,8 +143,8 @@ public class Driver {
 
 		String filename = null;
 		Scanner temp = null;
-		//System.out.print("\nPlease enter the input file name: ");
-		filename = "/Users/m_torjyan/Documents/EulerPathCIS22C_2017_Fall/input2.txt";
+		System.out.print("\nPlease enter the input file name: ");
+		filename = "/Users/dimafet/Documents/workspace/EulerPathCIS22C_2017_Fall/input2.txt";
 		File inputFile = new File(filename);
 		try {
 			temp = new Scanner(inputFile);

@@ -12,7 +12,7 @@ public class EulerGraph<E> extends Graph<E> {
 	// undo
 	// here we have a Queue of the steps that we can reverse any time
 	Stack<Step<E>> steps = new Stack<>();
-	
+
 	// Function to add an edge into the graph
 	@Override
 	public void addEdge(E source, E dest, double cost) {
@@ -41,8 +41,6 @@ public class EulerGraph<E> extends Graph<E> {
 	
 	// just can undo the last step. Nothing more;
 	public boolean undo() {
-		// TODO: implement the stack
-		
 		// we delete the last step from the Queue
 		// at the same time we save it into the object
 		// so we can still use it
