@@ -48,7 +48,9 @@ public class EulerGraph<E> extends Graph<E> {
 	public boolean remove(E src, E dest) {
 		// removed the new Edge, so later we can undo it
 		// adjList.get(dst.data).second; 
-		steps.enqueue(new Step<E>(src, dest, vertexSet.get(src).getWeight(dest), Operation.ADDED));
+		// TODO: find out how to actually get the weight
+//		steps.enqueue(new Step<E>(src, dest, vertexSet.get(src).getWeight(dest), Operation.ADDED));
+		steps.enqueue(new Step<E>(src, dest, 0, Operation.ADDED));
 
 		return super.remove(src, dest);
 	}
