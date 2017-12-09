@@ -10,32 +10,9 @@ import graphFiles.Graph;
 //Shiyu Zhang
 public class Driver {
 	public static Scanner userScanner = new Scanner(System.in);
-	public static Map<Integer, String> airportIndex;
-	public static Map<String, Integer> airportIndexNameToIndex;
 
 	public static void main(String[] args) {
-		Scanner fileScanner = openInputFile();
-		EulerGraph/* <String> */ flightPath;
-
-		airportIndexNameToIndex = new HashMap<String, Integer>();
-		airportIndex = new HashMap<Integer, String>();
-
-		if (fileScanner == null) {
-			System.out.println("Unable to open the input file, ending program");
-			return;
-		} else {
-			int NumVert = fileScanner.nextInt();
-			flightPath = new EulerGraph(NumVert);
-			fillPath(fileScanner, flightPath);
-		}
 		
-		flightPath.showAdjTable();
-		
-		mainMenu(flightPath); // g.e. 5 3 SF - Boston
-		
-		System.out.println("--------------------------- THE NEW WORLD");
-		
-		flightPath.showAdjTable();
 	}
 
 	public static void mainMenu(EulerGraph a) { // GRAPH IS PLACEHOLDER
@@ -44,9 +21,15 @@ public class Driver {
 		
 		int choice = -1;
 		do {
-			System.out.println("Welcome to Euler's Algorithm \n" + "-1.Exit\n" + "1.Add a New Flight to the Graph\n"
-					+ "2.Delete Airport from graph \n" + "3.Undo last move\n" + "4.Show Adjacency List\n"
-					+ "5.Show Eulers Solution \n" + "6.Display Graph");
+			System.out.println("Welcome to Euler's Algorithm \n" 
+						+ "-1.Exit\n" 
+						+ "1.Add a New Flight to the Graph\n"
+						+ "2.Delete Airport from graph \n" 
+						+ "3.Undo last move\n" 
+						+ "4.Show Adjacency List\n"
+						+ "5.Show Eulers Solution \n" 
+						+ "6.Display Graph"
+						+ "7.Input Another File");
 
 			System.out.print("\n\nPlease enter your choice:");
 
@@ -102,39 +85,7 @@ public class Driver {
 
 		s.nextLine();
 
-		int numberOfVertices = 0;
-		while (s.hasNext()) {
-			String line = s.nextLine();// get next line
-			String[] temp = line.split(",");
-<<<<<<< HEAD
-			int air1 = -1, air2 = -1; // index of the airport;
-
-			// we change string to int
-			if (!airportIndexNameToIndex.containsKey(temp[0])) {
-				airportIndex.put(numberOfVertices, temp[0]);
-				airportIndexNameToIndex.put(temp[0], numberOfVertices);
-				air1 = numberOfVertices;
-
-				numberOfVertices++;
-			}
-
-			if (!airportIndex.containsValue(temp[1])) {
-				airportIndex.put(numberOfVertices, temp[1]);
-				airportIndexNameToIndex.put(temp[1], numberOfVertices);
-				air2 = numberOfVertices;
-
-				numberOfVertices++;
-			}
-
-			path.addEdge(air1 == -1 ? airportIndexNameToIndex.get(temp[0]) : air1,
-					air2 == -1 ? airportIndexNameToIndex.get(temp[1]) : air2);
-=======
-			path.addEdge(temp[0], temp[1]);
-			//path.numberOfVertices ++;
->>>>>>> 5fcaa03e3738918d028e0752c053df6049c2424f
-		}
-
-		path.setIndexToName(airportIndex);
+		
 
 	}
 
