@@ -195,15 +195,17 @@ public class Graph<E>
    //         adjacency list TO A TEXT FILE (SUGGEST TO PASS AN
    //        ALREADY OPEN PrintWriter TO THIS) !
 
-   // TODO: be able to call it from menu
+   // TODO: be able to call it from menu and actually put into the file
 	public void outputToFile(PrintWriter pw) {
 
 		Iterator<Entry<E, Vertex<E>>> iter;
 
 	    iter = vertexSet.entrySet().iterator();
 	    while(iter.hasNext()) {
-	         iter.next().getValue().showAdjList();
+	        iter.next().getValue().showAdjList();
 	    }
+	    
+	    
 	}
 }
 

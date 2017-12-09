@@ -34,11 +34,7 @@ public class LinkedQueue<T> implements QueueInterface<T>
 		frontNode = null;
 		backNode = null;
 	} // end default constructor
-	
-	public LinkedQueue(LinkedQueue<T> sourceQ) {
-		//copy the passed linkedque to the current linkedQueue
-		copy(sourceQ);
-	}
+
 	//to clear LQ
 	public void clear() {
 		//if there is at least 1 element
@@ -53,7 +49,7 @@ public class LinkedQueue<T> implements QueueInterface<T>
 		}
 		
 	}
-	
+	/*
 	// copy a linkedQueue into self
 	public void copy(LinkedQueue<T> toCopy) {
 		//get the top node of copy LQ
@@ -66,7 +62,7 @@ public class LinkedQueue<T> implements QueueInterface<T>
 		
 
 	}
-	
+	*/
 	//enquque an object 
 	public boolean enqueue(T newEntry)
 	{
