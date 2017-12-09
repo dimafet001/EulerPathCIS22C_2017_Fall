@@ -31,7 +31,7 @@ public class EulerGraph<E> extends Graph<E> {
 	
 	// Function to add an edge into the graph
 	@Override
-	public void addEdge(E source, E dest, int cost) {
+	public void addEdge(E source, E dest, double cost) {
 		super.addEdge(source, dest, cost);
 		
 		// added the new Edge, so later we can undo it
@@ -39,7 +39,7 @@ public class EulerGraph<E> extends Graph<E> {
 	}
 
 	@Override
-	public void addEdge(E source, E dest, double cost) {
+	public void addEdge(E source, E dest, int cost) {
 		addEdge(source, dest, (int)cost);
 	}
 	

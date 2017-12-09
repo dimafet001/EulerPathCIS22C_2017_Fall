@@ -96,6 +96,7 @@ public class Driver {
 
 		while(s.hasNext()) {
 			String[] ar = s.nextLine().split(",");
+			System.out.println(ar[0] + " "+ ar[1]);
 			path.addEdge(ar[0], ar[1], Double.parseDouble(ar[2]));
 		}
 	}
