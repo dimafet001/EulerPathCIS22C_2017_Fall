@@ -30,7 +30,7 @@ public class Driver {
 						+ "-1.Exit\n" 
 						+ "1.Add a New Flight to the Graph\n"
 						+ "2.Delete Airport from graph \n" 
-						+ "3.Undo last add\n" 
+						+ "3.Undo last move\n" 
 						+ "4.Show Adjacency List\n"
 						+ "5.Show Eulers Solution \n" 
 						+ "6.Display Graph \n"
