@@ -3,29 +3,17 @@ import java.util.Stack;
 
 import graphFiles.Graph;
 
-// author Dongbo Liu + Dolgopolov Dmitry 
+/** 
+ * @author Dongbo Liu, Dolgopolov Dmitry
+ *
+ * @param <E>
+ */
 
 public class EulerGraph<E> extends Graph<E> {
-	// ToDo: instead, use the parent class
 
-	// undo part -----------------
-
+	// undo
 	// here we have a Queue of the steps that we can reverse any time
-	Stack<Step<E>> steps;
-
-	
-
-	// private operation lastOperation = operation.NONE;
-	// private int lastV, lastW; // last vertices we worked with
-	// undo part end -------------
-
-	public EulerGraph() {
-		super();
-		
-		steps = new Stack<>();
-	}
-
-
+	Stack<Step<E>> steps = new Stack<>();
 	
 	// Function to add an edge into the graph
 	@Override
