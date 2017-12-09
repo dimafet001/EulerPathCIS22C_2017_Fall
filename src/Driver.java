@@ -27,14 +27,13 @@ public class Driver {
 		Scanner choiceScan = new Scanner(System.in);
 		do {
 			System.out.println("Welcome to Euler's Algorithm \n" 
-						+ "-1.Exit\n" 
-						+ "1.Add a New Flight to the Graph\n"
-						+ "2.Delete Airport from graph \n" 
-						+ "3.Undo last move\n" 
-						+ "4.Show Adjacency List\n"
-						+ "5.Show Eulers Solution \n" 
-						+ "6.Display Graph \n"
-						+ "7.Input Another File");
+						+ "-1 : Exit.\n" 
+						+ "1 : Add a New Flight to the Graph.\n"
+						+ "2 : Delete Airport from graph.\n" 
+						+ "3 : Undo last move.\n" 
+						+ "4 : Output.\n"
+						+ "5 : Show Eulers Solution.\n" 
+						+ "7 : Input Another File.");
 
 			System.out.print("\n\nPlease enter your choice:");
 
@@ -62,12 +61,31 @@ public class Driver {
 				a.remove(remFrom, remTo);
 				break;
 			case 3:
-				
-				System.out.println("Undoing");
+				if(a.undo()) {
+					System.out.println("Successfully undid last move");
+				}else {
+					System.out.println("Could not undo.");
+				}
 				break;
 			case 4:
-				System.out.println("Showing the data");
-				a.showAdjTable();
+				System.out.println("1 : Display to console \n "
+								+ "2 : Display to File");
+				int sc = choiceScan.nextInt();
+				String[] subChoice = presentOutputChoices(choiceScan);
+				switch(sc) {
+				case 1: 
+					switch(Integer.parseInt(subChoice[0])) {
+						case 1: 
+							a.depthFirstTraversal(subChoice[1], new Visitor() {
+								 public void visit(Object obj) {
+									System.out.println(obj.toString()); 
+								 }
+							});
+							break;
+					
+					}
+				}
+				
 				break;
 			case 5:
 
@@ -91,7 +109,20 @@ public class Driver {
 		} while (choice != -1);
 
 	}
+	
+	public static String[] presentOutputChoices(Scanner in) {
+		System.out.println("1 : Output using Depth-First Traversal\n"
+						  +"2 : Output using Breadth-First Traversal\n"
+						  + "3 : Output Adjacency List");
+		
+		String[] choice =  new String[3];
+		choice[0] = in.next();
+		System.out.println("From where?");
+		choice[1] = in.next();
+		return choice;
 
+	}
+	
 	static void fillPath(Scanner s, EulerGraph path) {
 
 		while(s.hasNext()) {
