@@ -1,32 +1,17 @@
-import java.io.PrintWriter;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Stack;
 
-
-// author Dongbo Liu + Dolgopolov Dmitry 
+/** 
+ * @author Dongbo Liu, Dolgopolov Dmitry
+ *
+ * @param <E>
+ */
 
 public class EulerGraph<E> extends Graph<E> {
-	// ToDo: instead, use the parent class
 
-	// undo part -----------------
-
+	// undo
 	// here we have a Queue of the steps that we can reverse any time
-	Stack<Step<E>> steps;
-
-	
-
-	// private operation lastOperation = operation.NONE;
-	// private int lastV, lastW; // last vertices we worked with
-	// undo part end -------------
-
-	public EulerGraph() {
-		super();
-		
-		steps = new Stack<>();
-	}
-
-
+	Stack<Step<E>> steps = new Stack<>();
 	
 	// Function to add an edge into the graph
 	@Override
@@ -61,7 +46,7 @@ public class EulerGraph<E> extends Graph<E> {
 		// we delete the last step from the Queue
 		// at the same time we save it into the object
 		// so we can still use it
-		Step<E> lastStep = steps.dequeue();
+		Step<E> lastStep = steps.pop();
 		
 		// if we added we remove and viceversa
 		if (lastStep.getOperation() == Operation.ADDED)

@@ -3,7 +3,10 @@ import java.util.*;
 import java.util.Map.Entry;
 
 
-// co-author Dmitry Dolgopolov
+/**
+ * @author Mher Torjyan (the changes and traversal)
+ * @param <T>
+ */
 //	I set up this file for the further work of the project
 
 interface Visitor<T>
@@ -126,7 +129,11 @@ public class Graph<E>
 	   breadthFirstTraversalHelper( startVertex, visitor );
    }
 
-   /** Depth-first traversal from the parameter startElement */
+   
+   /** Depth-first traversal from the parameter startElement
+    * @author Mher Torjyan
+    * Part with the DFT
+    *  */
    public void depthFirstTraversal(E startElement, Visitor<E> visitor)
    {
 	   unvisitVertices();
