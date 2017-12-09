@@ -1,6 +1,9 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.text.NumberFormat;
+import java.text.ParseException;
 import java.util.InputMismatchException;
+import java.util.Locale;
 import java.util.Scanner;
 
 /**
@@ -130,11 +133,15 @@ public class Driver {
 	}
 	
 	static void fillPath(Scanner s, EulerGraph path) {
-
+		NumberFormat format = NumberFormat.getInstance(Locale.US);
 		while(s.hasNext()) {
 			String[] ar = s.nextLine().split(",");
-			System.out.println(ar[0] + " "+ ar[1]);
-			path.addEdge(ar[0], ar[1], Double.parseDouble(ar[2]));
+			try {
+				path.addEdge(ar[0], ar[1], format.parse(ar[2].trim()).doubleValue());
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -144,7 +151,7 @@ public class Driver {
 		String filename = null;
 		Scanner temp = null;
 		//System.out.print("\nPlease enter the input file name: ");
-		filename = "/Users/m_torjyan/Documents/EulerPathCIS22C_2017_Fall/input2.txt";
+		filename = "/Users/m_torjyan/Documents/EulerPathCIS22C_2017_Fall/input3.txt";
 		File inputFile = new File(filename);
 		try {
 			temp = new Scanner(inputFile);
