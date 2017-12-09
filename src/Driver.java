@@ -77,7 +77,7 @@ public class Driver {
 						case 1: 
 							a.depthFirstTraversal(subChoice[1], new Visitor() {
 								 public void visit(Object obj) {
-									 
+									System.out.println(obj.toString()); 
 								 }
 							});
 							break;
