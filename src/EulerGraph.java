@@ -1,6 +1,7 @@
 import java.io.PrintWriter;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Stack;
 
 import graphFiles.Graph;
 import graphFiles.LinkedQueue;
@@ -13,7 +14,7 @@ public class EulerGraph<E> extends Graph<E> {
 	// undo part -----------------
 
 	// here we have a Queue of the steps that we can reverse any time
-	LinkedQueue<Step<E>> steps;
+	Stack<Step<E>> steps;
 
 	
 
@@ -24,7 +25,7 @@ public class EulerGraph<E> extends Graph<E> {
 	public EulerGraph() {
 		super();
 		
-		steps = new LinkedQueue<>();
+		steps = new Stack<>();
 	}
 
 
@@ -35,7 +36,7 @@ public class EulerGraph<E> extends Graph<E> {
 		super.addEdge(source, dest, cost);
 		
 		// added the new Edge, so later we can undo it
-		steps.enqueue(new Step<E>(source, dest, cost, Operation.ADDED));
+		steps.add(new Step<E>(source, dest, cost, Operation.ADDED));
 	}
 
 	@Override
@@ -48,7 +49,9 @@ public class EulerGraph<E> extends Graph<E> {
 	public boolean remove(E src, E dest) {
 		// removed the new Edge, so later we can undo it
 		// adjList.get(dst.data).second; 
-		steps.enqueue(new Step<E>(src, dest, vertexSet.get(src).getWeight(dest), Operation.ADDED));
+		// TODO: find out how to actually get the weight
+//		steps.enqueue(new Step<E>(src, dest, vertexSet.get(src).getWeight(dest), Operation.ADDED));
+		steps.add(new Step<E>(src, dest, 0, Operation.ADDED));
 
 		return super.remove(src, dest);
 	}
@@ -74,7 +77,7 @@ public class EulerGraph<E> extends Graph<E> {
 
 
 	public void findEulerPath() { // find Euler path using fleury algorithm
-
+		//ToDo: actually put the algorithm in here
 	}
 
 	
@@ -95,13 +98,6 @@ public class EulerGraph<E> extends Graph<E> {
 
 	public void setIndexToName(Map<Integer, String> map) {
 		indexToName = map;
-	}
-
-	public void printIndexToName() {
-
-		for (int i = 0; i < numberOfVertices; i++) {
-			System.out.println("Index " + i + ": " + indexToName.get(i));
-		}
 	}
 
 	enum Operation {
