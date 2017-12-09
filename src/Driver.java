@@ -82,7 +82,13 @@ public class Driver {
 								 }
 							});
 							break;
-					
+						case 2: 
+							a.breadthFirstTraversal(subChoice[1], new Visitor() {
+								 public void visit(Object obj) {
+									System.out.println(obj.toString()); 
+								 }
+							});
+							break;
 					}
 				}
 				

@@ -8,7 +8,22 @@
    UPDATED by C. Lee-Klawender
    NOTE: the LinkedQueue class includes the Node class as an inner class
 */
-public class LinkedQueue<T> implements QueueInterface<T>
+
+/*
+ -Name of program : Programming Homework Assignment #2 AIRPORT SIMULATOR
+
+-Programmer's name : Mher Torjyan
+
+-Current Date : 10/23/17
+
+-Computer operating system and compiler you are using : MAC OSX
+
+-Brief description of the program (1-5 sentences)
+This program simulates an airport runway using a LinkedQueue to store the planes.  
+
+*/
+
+public class LinkedQueue<T extends DeepCloneable<T>> implements QueueInterface<T>
 {
   private Node frontNode; // References node at front of queue
   private Node backNode;  // References node at back of queue
@@ -19,14 +34,57 @@ public class LinkedQueue<T> implements QueueInterface<T>
 		frontNode = null;
 		backNode = null;
 	} // end default constructor
+	
+	public LinkedQueue(LinkedQueue<T> sourceQ) {
+		//copy the passed linkedque to the current linkedQueue
+		copy(sourceQ);
+	}
+	//to clear LQ
+	public void clear() {
+		//if there is at least 1 element
+		if(frontNode != backNode) {
+			//set front nex tnode to the back
+			frontNode.next = backNode;
+			//reset front and back
+			frontNode = null;
+			backNode = null;
+			//reset count
+			count = 0;
+		}
+		
+	}
+	
+	// copy a linkedQueue into self
+	public void copy(LinkedQueue<T> toCopy) {
+		//get the top node of copy LQ
+		Node curNode = toCopy.frontNode;
+		//Keep adding to current LQ by creating a deepClone of each object
+		do {
+			enqueue(curNode.data.deepClone());
+			curNode = curNode.getNextNode();
+		} while (curNode != toCopy.backNode.next);
+		
 
+	}
+	
+	//enquque an object 
 	public boolean enqueue(T newEntry)
 	{
 	// ADD CODE TO add data to linked list HERE!
 	// In addition to updating the backNode, also
 	//    make sure you check if the list was empty before adding this
 	//    and update the correct variable if so
-
+		
+		Node cur = new Node(newEntry,null);
+		
+		if(isEmpty()) { //if empty set to frontNode
+			frontNode = cur;
+		}else {// if not empty set the next of back to the curNode
+			backNode.setNextNode(cur);
+		}
+		//set the backNode to the curNode
+		backNode = cur;
+		//increment count
 		++count;
 		return true;
 	} // end enqueue
@@ -39,18 +97,26 @@ public class LinkedQueue<T> implements QueueInterface<T>
             return frontNode.getData();
 	} // end getFront
 
-	public T dequeue()
-	{
+	//deque from LQ
+	public T dequeue(){
+		
 	   T front = peekFront();
-       if( count > 0 )
-       {
+       if( count > 0 ) { // if is not empty
+    	   	//update front node to point to the next node
+    	   		frontNode = frontNode.getNextNode();
+    	   		
 	// ADD CODE TO remove data from linked list HERE!
 	// In addition to updating the frontNode, also
 	//    make sure to check if the list becomes empty and
 	//    update the correct variable if so
 
-
+    	   		//decrement count
           --count;
+          
+          // if now is null set the backNode to null
+          if(count == 0) {
+        	  	backNode = null;
+          }
         }
 
         return front;
