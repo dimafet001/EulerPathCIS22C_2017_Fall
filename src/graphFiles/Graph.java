@@ -167,6 +167,7 @@ public class Graph<E>
 
    public void depthFirstTraversalHelper(Vertex<E> startVertex, Visitor<E> visitor)
    {
+	   //TODO: depthFirstTraversal!11!!!!11!1!!!!!!111!!!!!
         // YOU COMPLETE THIS (USE THE RECURSIVE ALGORITHM GIVEN FOR LESSON 11 EXERCISE)
    }
 
@@ -195,7 +196,7 @@ class Vertex<E>
 	
 	public Vertex() { this(null); }
 	
-	public E getData(){ return data; }
+	public E getData() { return data; }
 	
 	public boolean isVisited(){ return visited; }
 	
