@@ -48,70 +48,6 @@ public class EulerGraph<E> extends Graph {
 		return super.remove(src, dest);
 	}
 
-	// just can undo the last step. Nothing more;
-	void undo() {
-		// TODO: implement the stack
-		
-		// we delete the last step from the Queue
-		// at the same time we save it into the object
-		// so we can still use it
-		Step lastStep = steps.dequeue();
-		
-		// if we added we remove and viceversa
-		if (lastStep.getOperation() == Operation.ADDED)
-			remove(lastStep.getSrc(), lastStep.getDst());
-		else if (lastStep.getOperation() == Operation.REMOVED) {
-			adjacencyMatrix[lastV].add(lastW - 1);
-			adjacencyMatrix[lastW].add(lastV - 3);
-		}
-
-	}
-
-	// A function used by DFS
-	void DFSUtil(int v, boolean visited[]) {
-		// Mark the current node as visited
-		visited[v] = true;
-		// TODO: display the solution and have an option of saving it to the
-		// file
-		// Recur for all the vertices adjacent to this vertex
-		Iterator<Integer> i = adjacencyMatrix[v].listIterator();
-		while (i.hasNext()) {
-			int n = i.next();
-			if (!visited[n])
-				DFSUtil(n, visited);
-		}
-	}
-
-	// For checking if all non-zero degree vertices are
-	// connected. It does DFS traversal starting from
-	boolean isConnected() {
-		// Set all the vertices to be non-visited
-		int i;
-		boolean visited[] = new boolean[numberOfVertices];
-		for (i = 0; i < numberOfVertices; i++) {
-			visited[i] = false;
-		}
-		// Find a vertex with non-zero degree
-		for (i = 0; i < numberOfVertices; i++) {
-			if (adjacencyMatrix[i].size() != 0) {
-				break;
-			}
-		}
-		// If there are no edges in the graph, return true
-		if (i == numberOfVertices) {
-			return true;
-		}
-		// Start traversal from a non-zero degree vertex
-		DFSUtil(i, visited);
-
-		// Check if all non-zero degree vertices are visited
-		for (i = 0; i < numberOfVertices; i++) {
-			if (visited[i] == false && adjacencyMatrix[i].size() > 0) {
-				return false;
-			}
-		} // TODO: store the solution to a Stack
-		return true;
-	}
 
 	// Check grpah is an Eulerian path
 	boolean isEulerian() {
@@ -138,33 +74,8 @@ public class EulerGraph<E> extends Graph {
 
 	}
 
-	// TODO: be able to call it from menu
-	public void outputToFile(PrintWriter pw) {
+	
 
-		for (int i = 0; i < numberOfVertices; i++) {
-
-			pw.println("Adj List for " + indexToName.get(i) + ": ");
-
-			for (int j = 0; j < adjacencyMatrix[i].size(); j++) {
-				pw.print(indexToName.get("\t" + adjacencyMatrix[i].get(j)));
-			}
-		}
-	}
-
-	public void showAdjTable() {
-		for (int i = 0; i < numberOfVertices; i++) {
-
-			System.out.println("Adj List for " + indexToName.get(i) + ": ");
-			// System.out.println( "Adj List for " + i + ": ");
-
-			for (int j = 0; j < adjacencyMatrix[i].size(); j++) {
-				System.out.print("\n\t" + indexToName.get(adjacencyMatrix[i].get(j)));
-				// System.out.print( "\n\t" + adjacencyMatrix[i].get(j));
-			} // Bad coz it should be generic
-
-			System.out.println();
-		}
-	}
 
 	/*
 	 * Iterator<Entry<E, Pair<Vertex<E>, Double>>> iter ; Entry<E,

@@ -13,54 +13,64 @@ public class Driver {
 
 	public static void main(String[] args) {
 		
+		EulerGraph<String> g1 = new EulerGraph<String>();
+		userScanner = openInputFile();
+		fillPath(userScanner, g1);
+		g1.showAdjTable();
+		mainMenu(g1);
+		
 	}
 
 	public static void mainMenu(EulerGraph a) { // GRAPH IS PLACEHOLDER
-
-		a.printIndexToName();
 		
 		int choice = -1;
+		Scanner choiceScan = new Scanner(System.in);
 		do {
 			System.out.println("Welcome to Euler's Algorithm \n" 
 						+ "-1.Exit\n" 
 						+ "1.Add a New Flight to the Graph\n"
 						+ "2.Delete Airport from graph \n" 
-						+ "3.Undo last move\n" 
+						+ "3.Undo last add\n" 
 						+ "4.Show Adjacency List\n"
 						+ "5.Show Eulers Solution \n" 
-						+ "6.Display Graph"
+						+ "6.Display Graph \n"
 						+ "7.Input Another File");
 
 			System.out.print("\n\nPlease enter your choice:");
 
 			try {
-				choice = userScanner.nextInt(); // try catch
+				choice = choiceScan.nextInt(); // try catch
 			} catch (InputMismatchException e) {
 				System.out.println("Please enter a valid number.");
 			}
-// TODO read another file in the same run
+			// TODO read another file in the same run
 			switch (choice) {
 			case 1: // add
-				a.addEdge(userScanner.nextInt(), userScanner.nextInt());
-				System.out.println("added an edge");
+				System.out.println("Where is the flight from?");
+				String from = choiceScan.next();
+				System.out.println("Where is the flight to?");
+				String to = choiceScan.next();
+				System.out.println("How far are the two airports?");
+				double weight = choiceScan.nextDouble();
+				a.addEdge(from, to, weight);
 				break;
-			case 2: // delete existing cellTower
-				a.remove(userScanner.nextInt(), userScanner.nextInt());
-				System.out.println("removed the edge");
+			case 2: 
+				System.out.println("Where are you removing from?");
+				String remFrom = choiceScan.next();
+				System.out.println("Where was the flight to?");
+				String remTo = choiceScan.next();
+				a.remove(remFrom, remTo);
 				break;
-			case 3://
+			case 3:
+				
 				System.out.println("Undoing");
-				a.undo();
 				break;
-			case 4:// Show adjacency list
+			case 4:
 				System.out.println("Showing the data");
 				a.showAdjTable();
 				break;
 			case 5:
-				System.out.println("Finding the path. What vertice?");
-				// File outfile = new Fle()
-				boolean[] visited = new boolean[9];
-				a.DFSUtil(userScanner.nextInt(), visited);;
+
 				break;
 			case 6:// exit
 				System.out.println("Exiting");
@@ -72,6 +82,7 @@ public class Driver {
 			default:
 				break;
 			}
+			
 			// TODO: Traversals [DFT, BFT]
 			// fix Remove
 			// delete the flight
@@ -83,10 +94,10 @@ public class Driver {
 
 	static void fillPath(Scanner s, EulerGraph path) {
 
-		s.nextLine();
-
-		
-
+		while(s.hasNext()) {
+			String[] ar = s.nextLine().split(",");
+			path.addEdge(ar[0], ar[1], Double.parseDouble(ar[2]));
+		}
 	}
 
 	// Shiyu, Zhang
@@ -94,8 +105,8 @@ public class Driver {
 
 		String filename = null;
 		Scanner temp = null;
-		System.out.print("\nPlease enter the input file name: ");
-		filename = userScanner.nextLine();
+		//System.out.print("\nPlease enter the input file name: ");
+		filename = "/Users/m_torjyan/Documents/EulerPathCIS22C_2017_Fall/input2.txt";
 		File inputFile = new File(filename);
 		try {
 			temp = new Scanner(inputFile);
