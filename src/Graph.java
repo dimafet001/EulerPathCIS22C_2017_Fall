@@ -140,7 +140,7 @@ public class Graph<E>
    {
 	   LinkedQueue<Vertex<E>> vertexQueue = new LinkedQueue<>();
 	   E startData = startVertex.getData();
-	   //System.out.println(startData.toString());
+	  
 	   startVertex.visit();
 	   visitor.visit(startData);
 	   vertexQueue.enqueue(startVertex);

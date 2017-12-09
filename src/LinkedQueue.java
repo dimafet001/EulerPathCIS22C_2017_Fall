@@ -23,7 +23,7 @@ This program simulates an airport runway using a LinkedQueue to store the planes
 
 */
 
-public class LinkedQueue<T extends DeepCloneable<T>> implements QueueInterface<T>
+public class LinkedQueue<T> implements QueueInterface<T>
 {
   private Node frontNode; // References node at front of queue
   private Node backNode;  // References node at back of queue
