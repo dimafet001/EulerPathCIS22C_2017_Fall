@@ -1,4 +1,3 @@
-package graphFiles;
 /**
    A class that implements the ADT queue by using a chain of nodes
    that has both head and tail references.
