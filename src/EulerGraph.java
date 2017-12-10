@@ -140,6 +140,10 @@ public class EulerGraph<E extends Comparable<E>> extends Graph<E> {
 			System.out.println(cur.first + " " + cur.second);
 		}
 		
+		
+		System.out.println(startVertex.getKey());
+		
+		
 	}
 	
 	
