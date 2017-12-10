@@ -8,7 +8,7 @@ import java.util.Queue;
 /**
  * @author Dolgopolov Dmitry
  *
- * @param <E>
+ * @param <E extends Comparable<E>>
  */
 
 public class EulerGraph<E extends Comparable<E>> extends Graph<E> {

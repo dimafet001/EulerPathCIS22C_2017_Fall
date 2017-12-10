@@ -2,10 +2,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.NumberFormat;
-import java.text.ParseException;
-import java.util.InputMismatchException;
-import java.util.Locale;
 import java.util.Scanner;
 
 /**
@@ -29,10 +25,12 @@ public class Driver {
 		fillPath(openInputFile(), curGraph);
 		curGraph.showAdjTable();
 		mainMenu(curGraph);
-//		g1.findEulerPath();
 		
 	}
 
+	/**
+	 * @author Mher Torjyan, Dmitry Dolgopolov
+	 */
 	public static void mainMenu(EulerGraph a) { // GRAPH IS PLACEHOLDER
 		
 		int choice = -1;
@@ -55,7 +53,6 @@ public class Driver {
 				System.out.println("Please enter a valid number.");
 				continue; // starting the loop once again
 			}
-			// TODO read another file in the same run
 			switch (choice) {
 			case 1: // add
 				System.out.println("Where is the flight from?");
@@ -179,8 +176,8 @@ public class Driver {
 
 				break;
 			case 5:
-				// TODO: actually call the solution
-				System.out.println("Coming soon");
+				System.out.println();
+				curGraph.findEulerPath();
 				break;
 			case 6:
 				fillPath(openInputFile(), curGraph); 
@@ -204,6 +201,7 @@ public class Driver {
 
 	}
 	
+	/** @author Mher Torjyan */
 	public static int presentOutputChoices(Scanner in) {
 		System.out.println("1 : Output using Depth-First Traversal\n"
 						  +"2 : Output using Breadth-First Traversal\n"
@@ -211,6 +209,8 @@ public class Driver {
 		
 		return in.nextInt();
 	}
+	
+	/** @author Dmitry Dolgopolov */
 	public static String chooseStartingVertex(Scanner in) {
 //		System.out.println(curGraph.vertexSet.toString());
 		System.out.println("From where?");
@@ -224,6 +224,7 @@ public class Driver {
 		return ret;
 	}
 	
+	/** @author Shiyu Zhang, Dongbo Liu */
 	static void fillPath(Scanner s, EulerGraph path) {
 		
 		path.vertexSet.clear();
@@ -234,7 +235,7 @@ public class Driver {
 		}
 	}
 
-	// Shiyu, Zhang
+	/** @author Shiyu Zhang, Dmitry Dolgopolov*/
 	public static Scanner openInputFile() {
 
 		String filename = null;

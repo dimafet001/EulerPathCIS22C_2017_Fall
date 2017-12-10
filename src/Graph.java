@@ -5,6 +5,7 @@ import java.util.Map.Entry;
 
 /**
  * @author Mher Torjyan (the changes and traversal)
+ * 			Dmitry Dolgopolov (the output method)
  * @param <T>
  */
 //	I set up this file for the further work of the project
