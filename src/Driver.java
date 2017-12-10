@@ -2,10 +2,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.NumberFormat;
-import java.text.ParseException;
-import java.util.InputMismatchException;
-import java.util.Locale;
 import java.util.Scanner;
 
 /**
@@ -28,11 +24,18 @@ public class Driver {
 		System.out.println();
 		fillPath(openInputFile(), curGraph);
 		curGraph.showAdjTable();
+<<<<<<< HEAD
 //		mainMenu(curGraph);
 		curGraph.findEulerPath();
+=======
+		mainMenu(curGraph);
+>>>>>>> 9a869b76faa122597d34781a7c1ceff2539d41c8
 		
 	}
 
+	/**
+	 * @author Mher Torjyan, Dmitry Dolgopolov
+	 */
 	public static void mainMenu(EulerGraph a) { // GRAPH IS PLACEHOLDER
 		
 		int choice = -1;
@@ -55,7 +58,6 @@ public class Driver {
 				System.out.println("Please enter a valid number.");
 				continue; // starting the loop once again
 			}
-			// TODO read another file in the same run
 			switch (choice) {
 			case 1: // add
 				System.out.println("Where is the flight from?");
@@ -93,7 +95,7 @@ public class Driver {
 				break;
 			case 4:
 				System.out.println("1 : Display to console \n "
-								+ "2 : Display to File");
+								+ "2 : Output the Adjacency List to a File");
 				int sc = userScanner.nextInt();
 				
 				switch (sc) {
@@ -128,9 +130,7 @@ public class Driver {
 						break;
 					}
 					break;
-				case 2:
-					// TODO: make everything work
-					System.out.println("Coming Soon");
+				case 2://output adjTable to a file (new or old)
 					
 					// Trying to open the file
 					PrintWriter pw = null;
@@ -181,8 +181,8 @@ public class Driver {
 
 				break;
 			case 5:
-				// TODO: actually call the solution
-				System.out.println("Coming soon");
+				System.out.println();
+				curGraph.findEulerPath();
 				break;
 			case 6:
 				fillPath(openInputFile(), curGraph); 
@@ -206,6 +206,7 @@ public class Driver {
 
 	}
 	
+	/** @author Mher Torjyan */
 	public static int presentOutputChoices(Scanner in) {
 		System.out.println("1 : Output using Depth-First Traversal\n"
 						  +"2 : Output using Breadth-First Traversal\n"
@@ -213,6 +214,8 @@ public class Driver {
 		
 		return in.nextInt();
 	}
+	
+	/** @author Dmitry Dolgopolov */
 	public static String chooseStartingVertex(Scanner in) {
 //		System.out.println(curGraph.vertexSet.toString());
 		System.out.println("From where?");
@@ -226,6 +229,7 @@ public class Driver {
 		return ret;
 	}
 	
+	/** @author Shiyu Zhang, Dongbo Liu */
 	static void fillPath(Scanner s, EulerGraph path) {
 		
 		path.vertexSet.clear();
@@ -236,7 +240,7 @@ public class Driver {
 		}
 	}
 
-	// Shiyu, Zhang
+	/** @author Shiyu Zhang, Dmitry Dolgopolov*/
 	public static Scanner openInputFile() {
 
 		String filename = null;
