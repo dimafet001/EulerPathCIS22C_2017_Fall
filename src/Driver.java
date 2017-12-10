@@ -28,8 +28,8 @@ public class Driver {
 		System.out.println();
 		fillPath(openInputFile(), curGraph);
 		curGraph.showAdjTable();
-		mainMenu(curGraph);
-//		g1.findEulerPath();
+//		mainMenu(curGraph);
+		curGraph.findEulerPath();
 		
 	}
 
@@ -242,11 +242,11 @@ public class Driver {
 		String filename = null;
 		Scanner temp = null;
 
-		System.out.print("\nPlease enter the input file name: ");
-//		filename = "/Users/m_torjyan/Documents/EulerPathCIS22C_2017_Fall/input3.txt";
+	//	System.out.print("\nPlease enter the input file name: ");
+		filename = "/Users/m_torjyan/Documents/EulerPathCIS22C_2017_Fall/input3.txt";
 //		filename = "/Users/dimafet/Documents/workspace/EulerPathCIS22C_2017_Fall/input3.txt";
 		
-		filename = userScanner.next();
+		//filename = userScanner.next();
 		
 		File inputFile = new File(filename);
 		try {
