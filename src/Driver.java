@@ -17,8 +17,7 @@ public class Driver {
 	public static void main(String[] args) {
 		
 		EulerGraph<String> g1 = new EulerGraph<String>();
-		userScanner = openInputFile();
-		fillPath(userScanner, g1);
+		fillPath(openInputFile(), g1);
 		g1.showAdjTable();
 		mainMenu(g1);
 		
@@ -27,7 +26,7 @@ public class Driver {
 	public static void mainMenu(EulerGraph a) { // GRAPH IS PLACEHOLDER
 		
 		int choice = -1;
-		Scanner choiceScan = new Scanner(System.in);
+	
 		do {
 			System.out.println("Welcome to Euler's Algorithm \n" 
 						+ "-1 : Exit.\n" 
@@ -41,7 +40,7 @@ public class Driver {
 			System.out.print("\n\nPlease enter your choice:");
 
 			try {
-				choice = choiceScan.nextInt(); // try catch
+				choice = userScanner.nextInt(); // try catch
 			} catch (InputMismatchException e) {
 				System.out.println("Please enter a valid number.");
 			}
@@ -49,18 +48,18 @@ public class Driver {
 			switch (choice) {
 			case 1: // add
 				System.out.println("Where is the flight from?");
-				String from = choiceScan.next();
+				String from = userScanner.next();
 				System.out.println("Where is the flight to?");
-				String to = choiceScan.next();
+				String to = userScanner.next();
 				System.out.println("How far are the two airports?");
-				double weight = choiceScan.nextDouble();
+				double weight = userScanner.nextDouble();
 				a.addEdge(from, to, weight);
 				break;
 			case 2: 
 				System.out.println("Where are you removing from?");
-				String remFrom = choiceScan.next();
+				String remFrom = userScanner.next();
 				System.out.println("Where was the flight to?");
-				String remTo = choiceScan.next();
+				String remTo = userScanner.next();
 				a.remove(remFrom, remTo);
 				break;
 			case 3:
@@ -73,24 +72,29 @@ public class Driver {
 			case 4:
 				System.out.println("1 : Display to console \n "
 								+ "2 : Display to File");
-				int sc = choiceScan.nextInt();
-				String[] subChoice = presentOutputChoices(choiceScan);
+				int sc = userScanner.nextInt();
+				
+				presentOutputChoices(userScanner);
 				switch(sc) {
 				case 1: 
-					switch(Integer.parseInt(subChoice[0])) {
+					switch(presentOutputChoices(userScanner)) {
 						case 1: 
-							a.depthFirstTraversal(subChoice[1], new Visitor() {
+							a.depthFirstTraversal(chooseStartingVertex(userScanner), new Visitor() {
 								 public void visit(Object obj) {
 									System.out.println(obj.toString()); 
 								 }
 							});
 							break;
 						case 2: 
-							a.breadthFirstTraversal(subChoice[1], new Visitor() {
+							a.breadthFirstTraversal(chooseStartingVertex(userScanner), new Visitor() {
 								 public void visit(Object obj) {
 									System.out.println(obj.toString()); 
 								 }
 							});
+							break;
+						case 3:
+							//ToDo: change it later
+							a.outputToFile(null);
 							break;
 					}
 				}
@@ -119,17 +123,16 @@ public class Driver {
 
 	}
 	
-	public static String[] presentOutputChoices(Scanner in) {
+	public static int presentOutputChoices(Scanner in) {
 		System.out.println("1 : Output using Depth-First Traversal\n"
 						  +"2 : Output using Breadth-First Traversal\n"
 						  + "3 : Output Adjacency List");
 		
-		String[] choice =  new String[3];
-		choice[0] = in.next();
+		return in.nextInt();
+	}
+	public static int chooseStartingVertex(Scanner in) {
 		System.out.println("From where?");
-		choice[1] = in.next();
-		return choice;
-
+		return in.nextInt();
 	}
 	
 	static void fillPath(Scanner s, EulerGraph path) {
@@ -148,6 +151,7 @@ public class Driver {
 		Scanner temp = null;
 		//System.out.print("\nPlease enter the input file name: ");
 		filename = "/Users/m_torjyan/Documents/EulerPathCIS22C_2017_Fall/input2.txt";
+
 		File inputFile = new File(filename);
 		try {
 			temp = new Scanner(inputFile);

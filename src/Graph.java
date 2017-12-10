@@ -34,7 +34,7 @@ public class Graph<E>
       // put both source and dest into vertex list(s) if not already there
       src = addToVertexSet(source);
       dst = addToVertexSet(dest);
-
+      
       // add dest to source's adjacency list
       src.addToAdjList(dst, cost);
       dst.addToAdjList(src, cost); // ADD THIS IF UNDIRECTED GRAPH
@@ -53,11 +53,7 @@ public class Graph<E>
 
       // find if Vertex already in the list:
       foundVertex = vertexSet.get(x);
-     
-//      if ( foundVertex != null ) // found it, so return it
-//      {
-//         
-//      }
+
       if(vertexSet.containsKey(x)) {
     	  	return foundVertex;
       }
@@ -177,8 +173,6 @@ public class Graph<E>
 
    public void depthFirstTraversalHelper(Vertex<E> startVertex, Visitor<E> visitor)
    {
-	   //TODO: depthFirstTraversal!11!!!!11!1!!!!!!111!!!!!
-        // YOU COMPLETE THIS (USE THE RECURSIVE ALGORITHM GIVEN FOR LESSON 11 EXERCISE)
 	   startVertex.visit();
        visitor.visit(startVertex.getData());
     
@@ -200,17 +194,17 @@ public class Graph<E>
    //         adjacency list TO A TEXT FILE (SUGGEST TO PASS AN
    //        ALREADY OPEN PrintWriter TO THIS) !
 
-   // TODO: be able to call it from menu
+   // TODO: be able to call it from menu and actually put into the file
 	public void outputToFile(PrintWriter pw) {
 
-		for (int i = 0; i < numberOfVertices; i++) {
+		Iterator<Entry<E, Vertex<E>>> iter;
 
-			pw.println("Adj List for " + indexToName.get(i) + ": ");
-
-			for (int j = 0; j < adjacencyMatrix[i].size(); j++) {
-				pw.print(indexToName.get("\t" + adjacencyMatrix[i].get(j)));
-			}
-		}
+	    iter = vertexSet.entrySet().iterator();
+	    while(iter.hasNext()) {
+	        iter.next().getValue().showAdjList();
+	    }
+	    
+	    
 	}
 }
 
