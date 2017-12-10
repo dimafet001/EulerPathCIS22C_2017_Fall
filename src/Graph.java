@@ -195,17 +195,30 @@ public class Graph<E extends Comparable<E>>
    //         adjacency list TO A TEXT FILE (SUGGEST TO PASS AN
    //        ALREADY OPEN PrintWriter TO THIS) !
 
-   // TODO: be able to call it from menu and actually put into the file
+	/** @author Dmitry Dolgopolov 
+	 * */ 
 	public void outputToFile(PrintWriter pw) {
 
-		Iterator<Entry<E, Vertex<E>>> iter;
+		Iterator<Entry<E, Vertex<E>>> iterVertex;
 
-	    iter = vertexSet.entrySet().iterator();
-	    while(iter.hasNext()) {
-	        iter.next().getValue().showAdjList();
-	    }
-	    
-	    
+		iterVertex = vertexSet.entrySet().iterator();
+		while (iterVertex.hasNext()) {
+			Iterator<Entry<E, Pair<Vertex<E>, Double>>> iter;
+			Entry<E, Pair<Vertex<E>, Double>> entry;
+			Pair<Vertex<E>, Double> pair;
+
+			Vertex<E> vertex = iterVertex.next().getValue();
+			pw.print("Adj List for " + vertex.data + ": ");
+			iter = vertex.adjList.entrySet().iterator();
+			while (iter.hasNext()) {
+				entry = iter.next();
+				pair = entry.getValue();
+				pw.print(pair.first.data + "(" + String.format("%3.1f", pair.second) + ") ");
+			}
+			pw.println();
+		}
+		pw.close();
+
 	}
 }
 
