@@ -239,9 +239,9 @@ public class Driver {
 		Scanner temp = null;
 
 	//	System.out.print("\nPlease enter the input file name: ");
-		filename = "/Users/m_torjyan/Documents/EulerPathCIS22C_2017_Fall/input3.txt";
+//		filename = "/Users/m_torjyan/Documents/EulerPathCIS22C_2017_Fall/input3.txt";
 //		filename = "/Users/dimafet/Documents/workspace/EulerPathCIS22C_2017_Fall/input3.txt";
-		
+		filename = "input1.txt";
 		//filename = userScanner.next();
 		
 		File inputFile = new File(filename);
