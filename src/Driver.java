@@ -24,12 +24,9 @@ public class Driver {
 		System.out.println();
 		fillPath(openInputFile(), curGraph);
 		curGraph.showAdjTable();
-<<<<<<< HEAD
 //		mainMenu(curGraph);
 		curGraph.findEulerPath();
-=======
-		mainMenu(curGraph);
->>>>>>> 9a869b76faa122597d34781a7c1ceff2539d41c8
+
 		
 	}
 

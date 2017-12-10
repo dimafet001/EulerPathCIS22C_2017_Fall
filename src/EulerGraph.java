@@ -111,7 +111,7 @@ public class EulerGraph<E extends Comparable<E>> extends Graph<E> {
 		}
 
 		System.out.println(numVertex);
-		LinkedQueue<Pair> adjQueue = new LinkedQueue();
+		LList<Pair> adjList = new LList();
 //		for (int i = 0; i < numVertex; i++) {
 //			adjQueue[i] = new LinkedQueue<Pair>();
 //		}
@@ -130,23 +130,41 @@ public class EulerGraph<E extends Comparable<E>> extends Graph<E> {
 				System.out.println(entry.getKey());
 				if(vertex.getKey().compareTo(entry.getKey()) < 0) {
 					Pair toAdd = new Pair(vertex.getKey(), entry.getKey());
-					adjQueue.enqueue(toAdd);
+					adjList.add(toAdd);
 				}
 			}
-			System.out.println();
+			
+			}
+		LinkedQueue<E> finalPath = new LinkedQueue<>();
+		finalPath = findPath(adjList, startVertex.getKey(), finalPath);
+		System.out.println("---------------------SOLUTION---------------------");
+		while(!finalPath.isEmpty()) {
+			System.out.println(finalPath.dequeue());
 		}
-		
-		while(!adjQueue.isEmpty()) {
-			Pair cur = adjQueue.dequeue();
-			System.out.println(cur.first + " " + cur.second);
-		}
-		
-		
-		System.out.println(startVertex.getKey());
-		
 		
 	}
 	
+	private LinkedQueue<E> findPath(LList<Pair> input, E curVertex, LinkedQueue<E> path) {
+		System.out.println("IN HERE");
+		if(input.getLength() == 0) {
+			return path;
+		}else {
+			for(int i = 1; i < input.getLength(); i++) {
+				if(curVertex.equals(input.getEntry(i).first)) {
+					curVertex = (E) input.getEntry(i).second;
+					path.enqueue(curVertex);
+					input.remove(i);
+					findPath(input,curVertex , path);
+				}else if(curVertex.equals(input.getEntry(i).second)) {
+					curVertex = (E) input.getEntry(i).first;
+					path.enqueue(curVertex);
+					input.remove(i);
+					findPath(input,curVertex , path);
+				}
+			}
+		}
+		return null;
+	}
 	
 	
 	private Map<Integer, String> indexToName;
