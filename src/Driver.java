@@ -17,8 +17,7 @@ public class Driver {
 	public static void main(String[] args) {
 		
 		EulerGraph<String> g1 = new EulerGraph<String>();
-		userScanner = openInputFile();
-		fillPath(userScanner, g1);
+		fillPath(openInputFile(), g1);
 		g1.showAdjTable();
 		mainMenu(g1);
 		
@@ -87,7 +86,7 @@ public class Driver {
 							});
 							break;
 						case 2: 
-							a.breadthFirstTraversal(chooseStartingVertex(userScanner);, new Visitor() {
+							a.breadthFirstTraversal(chooseStartingVertex(userScanner), new Visitor() {
 								 public void visit(Object obj) {
 									System.out.println(obj.toString()); 
 								 }

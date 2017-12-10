@@ -35,7 +35,7 @@ public class Graph<E>
       // put both source and dest into vertex list(s) if not already there
       src = addToVertexSet(source);
       dst = addToVertexSet(dest);
-
+      
       // add dest to source's adjacency list
       src.addToAdjList(dst, cost);
       dst.addToAdjList(src, cost); // ADD THIS IF UNDIRECTED GRAPH
@@ -54,7 +54,6 @@ public class Graph<E>
 
       // find if Vertex already in the list:
       foundVertex = vertexSet.get(x);
-
       if ( foundVertex != null ) // found it, so return it
       {
          return foundVertex;
