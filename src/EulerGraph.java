@@ -6,12 +6,12 @@ import java.util.Map.Entry;
 import java.util.Queue;
 
 /**
- * @author Dongbo Liu, Dolgopolov Dmitry
+ * @author Dolgopolov Dmitry
  *
  * @param <E>
  */
 
-public class EulerGraph<E> extends Graph<E> {
+public class EulerGraph<E extends Comparable<E>> extends Graph<E> {
 
 	// undo
 	// here we have a Queue of the steps that we can reverse any time
@@ -111,29 +111,40 @@ public class EulerGraph<E> extends Graph<E> {
 		}
 
 		System.out.println(numVertex);
-		LinkedQueue<Vertex>[] adjQueue = new LinkedQueue[numVertex];
-		for (int i = 0; i < numVertex; i++) {
-			adjQueue[i] = new LinkedQueue<Vertex>();
-		}
+		LinkedQueue<Pair> adjQueue = new LinkedQueue();
+//		for (int i = 0; i < numVertex; i++) {
+//			adjQueue[i] = new LinkedQueue<Pair>();
+//		}
 		
 		
+		int innerCounter = 0;
+		int outerCounter = 0;
 		
 		Iterator<Entry<E, Vertex<E>>> newIter = vertexSet.entrySet().iterator();
 		while (newIter.hasNext()) {
-			
-//			Iterator<Entry<E, Pair<Vertex<E>, Double>>> newIter2 = vertexSet.get(newIter.next().getKey()).iterator();
-			Iterator<Entry<E, Pair<Vertex<E>, Double>>> newIter2 = newIter.next().getValue().iterator();
-			Entry<E, Pair<Vertex<E>, Double>> entry = newIter2.next();
-			System.out.println(entry.getValue().first.data);
-			
-			
-			
+			Entry<E, Vertex<E>> vertex = newIter.next();
+			System.out.println(vertex.getKey());
+			Iterator<Entry<E, Pair<Vertex<E>, Double>>> newIter2 = vertex.getValue().iterator();
+			while(newIter2.hasNext()) {
+				Entry<E, Pair<Vertex<E>, Double>> entry = newIter2.next();
+				System.out.println(entry.getKey());
+				if(vertex.getKey().compareTo(entry.getKey()) < 0) {
+					Pair toAdd = new Pair(vertex.getKey(), entry.getKey());
+					adjQueue.enqueue(toAdd);
+				}
+			}
+			System.out.println();
 		}
-			
-	
-
+		
+		while(!adjQueue.isEmpty()) {
+			Pair cur = adjQueue.dequeue();
+			System.out.println(cur.first + " " + cur.second);
+		}
+		
 	}
-
+	
+	
+	
 	private Map<Integer, String> indexToName;
 
 	public void setIndexToName(Map<Integer, String> map) {

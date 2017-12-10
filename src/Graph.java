@@ -17,7 +17,7 @@ interface Visitor<T>
 
 
 //--- Graph class ------------------------------------------------------
-public class Graph<E>
+public class Graph<E extends Comparable<E>>
 {
    // the graph data is all here --------------------------
    protected HashMap<E, Vertex<E> > vertexSet;

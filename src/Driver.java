@@ -19,8 +19,8 @@ public class Driver {
 		EulerGraph<String> g1 = new EulerGraph<String>();
 		fillPath(openInputFile(), g1);
 		g1.showAdjTable();
-		mainMenu(g1);
-//		g1.findEulerPath();
+//		mainMenu(g1);
+		g1.findEulerPath();
 		
 	}
 
@@ -165,8 +165,8 @@ public class Driver {
 		String filename = null;
 		Scanner temp = null;
 		//System.out.print("\nPlease enter the input file name: ");
-//		filename = "/Users/m_torjyan/Documents/EulerPathCIS22C_2017_Fall/input3.txt";
-		filename = "/Users/dimafet/Documents/workspace/EulerPathCIS22C_2017_Fall/input3.txt";
+		filename = "/Users/m_torjyan/Documents/EulerPathCIS22C_2017_Fall/input3.txt";
+//		filename = "/Users/dimafet/Documents/workspace/EulerPathCIS22C_2017_Fall/input3.txt";
 		
 		File inputFile = new File(filename);
 		try {
