@@ -133,15 +133,11 @@ public class Driver {
 	}
 	
 	static void fillPath(Scanner s, EulerGraph path) {
-		NumberFormat format = NumberFormat.getInstance(Locale.US);
+		
 		while(s.hasNext()) {
 			String[] ar = s.nextLine().split(",");
-			try {
-				path.addEdge(ar[0], ar[1], format.parse(ar[2].trim()).doubleValue());
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			path.addEdge(ar[0], ar[1], Double.parseDouble(ar[2]));
+			
 		}
 	}
 
@@ -151,7 +147,7 @@ public class Driver {
 		String filename = null;
 		Scanner temp = null;
 		//System.out.print("\nPlease enter the input file name: ");
-		filename = "/Users/m_torjyan/Documents/EulerPathCIS22C_2017_Fall/input3.txt";
+		filename = "/Users/m_torjyan/Documents/EulerPathCIS22C_2017_Fall/input2.txt";
 		File inputFile = new File(filename);
 		try {
 			temp = new Scanner(inputFile);

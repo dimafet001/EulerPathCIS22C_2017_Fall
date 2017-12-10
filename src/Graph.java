@@ -31,7 +31,6 @@ public class Graph<E>
    public void addEdge(E source, E dest, double cost)
    {
       Vertex<E> src, dst;
-
       // put both source and dest into vertex list(s) if not already there
       src = addToVertexSet(source);
       dst = addToVertexSet(dest);
@@ -54,16 +53,20 @@ public class Graph<E>
 
       // find if Vertex already in the list:
       foundVertex = vertexSet.get(x);
-
-      if ( foundVertex != null ) // found it, so return it
-      {
-         return foundVertex;
+     
+//      if ( foundVertex != null ) // found it, so return it
+//      {
+//         
+//      }
+      if(vertexSet.containsKey(x)) {
+    	  	return foundVertex;
       }
 
       // the vertex not there, so create one
       retVal = new Vertex<E>(x);
       vertexSet.put(x, retVal);
 
+      
       return retVal;   // should never happen
    }
 
@@ -264,6 +267,7 @@ class Vertex<E>
 	
 	public int hashCode()
 	{
+		System.out.println(data.hashCode() + "HASHH");
 	      return (data.hashCode());
 	}
 	
