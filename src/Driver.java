@@ -131,7 +131,9 @@ public class Driver {
 					// Trying to open the file
 					PrintWriter pw = null;
 					try {
-						pw = new PrintWriter("/Users/dimafet/Documents/workspace/EulerPathCIS22C_2017_Fall/output.txt");
+						//"/Users/dimafet/Documents/workspace/EulerPathCIS22C_2017_Fall/output.txt"
+						System.out.println("Where do you want to output it? (Ex. output.txt [a file in the project])");
+						pw = new PrintWriter(userScanner.next());
 					} catch (FileNotFoundException e) {
 						System.out.println("File Not Found.\nDo you want to create a file? (Y/N)");
 						
@@ -238,10 +240,10 @@ public class Driver {
 		String filename = null;
 		Scanner temp = null;
 
-	//	System.out.print("\nPlease enter the input file name: ");
+		System.out.println("\nPlease enter the input file name: (Ex. input1.txt)");
 //		filename = "/Users/m_torjyan/Documents/EulerPathCIS22C_2017_Fall/input3.txt";
 //		filename = "/Users/dimafet/Documents/workspace/EulerPathCIS22C_2017_Fall/input3.txt";
-		filename = "input1.txt";
+//		filename = "input1.txt";
 		//filename = userScanner.next();
 		
 		File inputFile = new File(filename);
