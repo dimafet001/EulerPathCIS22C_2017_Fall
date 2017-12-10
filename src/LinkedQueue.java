@@ -9,20 +9,6 @@
    NOTE: the LinkedQueue class includes the Node class as an inner class
 */
 
-/*
- -Name of program : Programming Homework Assignment #2 AIRPORT SIMULATOR
-
--Programmer's name : Mher Torjyan
-
--Current Date : 10/23/17
-
--Computer operating system and compiler you are using : MAC OSX
-
--Brief description of the program (1-5 sentences)
-This program simulates an airport runway using a LinkedQueue to store the planes.  
-
-*/
-
 public class LinkedQueue<T> implements QueueInterface<T>
 {
   private Node frontNode; // References node at front of queue

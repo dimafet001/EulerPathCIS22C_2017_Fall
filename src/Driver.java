@@ -23,6 +23,7 @@ public class Driver {
 	
 	public static void main(String[] args) {
 		
+
 		curGraph = new EulerGraph<String>();
 		System.out.println();
 		fillPath(openInputFile(), curGraph);
@@ -238,6 +239,7 @@ public class Driver {
 
 		String filename = null;
 		Scanner temp = null;
+
 		System.out.print("\nPlease enter the input file name: ");
 //		filename = "/Users/m_torjyan/Documents/EulerPathCIS22C_2017_Fall/input3.txt";
 //		filename = "/Users/dimafet/Documents/workspace/EulerPathCIS22C_2017_Fall/input3.txt";
