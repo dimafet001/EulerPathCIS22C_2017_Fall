@@ -138,6 +138,7 @@ public class Graph<E>
 	   unvisitVertices();
 
 	   Vertex<E> startVertex = vertexSet.get(startElement);
+	   System.out.println("Data: " + startVertex.getData());
 	   depthFirstTraversalHelper( startVertex, visitor );
    }
 

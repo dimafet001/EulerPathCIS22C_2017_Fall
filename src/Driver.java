@@ -19,8 +19,8 @@ public class Driver {
 		EulerGraph<String> g1 = new EulerGraph<String>();
 		fillPath(openInputFile(), g1);
 		g1.showAdjTable();
-	//	mainMenu(g1);
-		g1.findEulerPath();
+		mainMenu(g1);
+//		g1.findEulerPath();
 		
 	}
 
@@ -31,7 +31,7 @@ public class Driver {
 		do {
 			System.out.println("Welcome to Euler's Algorithm \n" 
 						+ "-1 : Exit.\n" 
-						+ "1 : Add a New Flight to the Graph.\n"
+						+ "1 : Add a New Flight to the Graph. (You are not allowed to enter existing connections)\n"
 						+ "2 : Delete Airport from graph.\n" 
 						+ "3 : Undo last move.\n" 
 						+ "4 : Output.\n"
@@ -41,9 +41,10 @@ public class Driver {
 			System.out.print("\n\nPlease enter your choice:");
 
 			try {
-				choice = userScanner.nextInt(); // try catch
-			} catch (InputMismatchException e) {
+				choice = Integer.parseInt(userScanner.next()); // try catch
+			} catch (NumberFormatException e) {
 				System.out.println("Please enter a valid number.");
+				continue; // starting the loop once again
 			}
 			// TODO read another file in the same run
 			switch (choice) {
@@ -54,6 +55,10 @@ public class Driver {
 				String to = userScanner.next();
 				System.out.println("How far are the two airports?");
 				double weight = userScanner.nextDouble();
+				if (from.equals(to)) {
+					System.out.println("You cannot fly from-to one airport.");
+					break;
+				}
 				a.addEdge(from, to, weight);
 				break;
 			case 2: 
@@ -61,7 +66,14 @@ public class Driver {
 				String remFrom = userScanner.next();
 				System.out.println("Where was the flight to?");
 				String remTo = userScanner.next();
-				a.remove(remFrom, remTo);
+				if (remFrom.equals(remTo)) {
+					System.out.println("Failed. Non-existent edge");
+					break;
+				}
+				if (!a.remove(remFrom, remTo)) 
+					System.out.println("Failed removing. You probably used non-existent edge");
+				else
+					System.out.println("Successfully removed");
 				break;
 			case 3:
 				if(a.undo()) {
@@ -75,19 +87,20 @@ public class Driver {
 								+ "2 : Display to File");
 				int sc = userScanner.nextInt();
 				
-				presentOutputChoices(userScanner);
 				switch(sc) {
 				case 1: 
 					switch(presentOutputChoices(userScanner)) {
 						case 1: 
-							a.depthFirstTraversal(chooseStartingVertex(userScanner), new Visitor() {
+							// we need +"" because it is generics and we need to convert it to
+							// String instead of anything (e.g. int)
+							a.depthFirstTraversal(chooseStartingVertex(userScanner)+"", new Visitor() {
 								 public void visit(Object obj) {
 									System.out.println(obj.toString()); 
 								 }
 							});
 							break;
 						case 2: 
-							a.breadthFirstTraversal(chooseStartingVertex(userScanner), new Visitor() {
+							a.breadthFirstTraversal(chooseStartingVertex(userScanner)+"", new Visitor() {
 								 public void visit(Object obj) {
 									System.out.println(obj.toString()); 
 								 }
@@ -112,7 +125,8 @@ public class Driver {
 				System.out.println("Goodbye.");
 				break;
 			default:
-				break;
+				System.out.println("Invalid Input. Try again");
+				continue;//we just ask once again
 			}
 			
 			// TODO: Traversals [DFT, BFT]
@@ -151,8 +165,9 @@ public class Driver {
 		String filename = null;
 		Scanner temp = null;
 		//System.out.print("\nPlease enter the input file name: ");
-		filename = "/Users/m_torjyan/Documents/EulerPathCIS22C_2017_Fall/input3.txt";
-
+//		filename = "/Users/m_torjyan/Documents/EulerPathCIS22C_2017_Fall/input3.txt";
+		filename = "/Users/dimafet/Documents/workspace/EulerPathCIS22C_2017_Fall/input3.txt";
+		
 		File inputFile = new File(filename);
 		try {
 			temp = new Scanner(inputFile);
