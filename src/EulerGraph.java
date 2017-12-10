@@ -163,7 +163,7 @@ public class EulerGraph<E extends Comparable<E>> extends Graph<E> {
 	 * input.remove(i); return curVertex.toString() + " "+ findPath(input,
 	 * curVertex, path); } } } return ""; }
 	 */
-	private String findPath(LList<Pair> input, E curVertex, LinkedQueue<E> path, int totalEdgeNumber) {
+	private String findPath(LList<Pair> input, Vertex curVertex, LinkedQueue<E> path, int totalEdgeNumber) {
 
 		System.out.println("---------------------SOLUTION---------------------");
 		System.out.println("CURRENT VERTEX: " + curVertex);
