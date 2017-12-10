@@ -1,12 +1,9 @@
 import java.util.Iterator;
-import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Stack;
-import java.util.Map.Entry;
-import java.util.Queue;
 
 /**
- * @author Dolgopolov Dmitry
+ * @author Dolgopolov Dmitry, Mher Torjyan, Dongbo Liu
  *
  * @param <E extends Comparable<E>>
  */
@@ -19,6 +16,7 @@ public class EulerGraph<E extends Comparable<E>> extends Graph<E> {
 	// for not repeating the steps and looping forever
 	private boolean justUndid = false;
 
+	/** @author Dmitry Dolgopolov */
 	// Function to add an edge into the graph
 	@Override
 	public void addEdge(E source, E dest, double cost) {
@@ -29,17 +27,16 @@ public class EulerGraph<E extends Comparable<E>> extends Graph<E> {
 			steps.add(new Step<E>(source, dest, cost, Operation.ADDED));
 		justUndid = false;
 	}
-
+	
 	@Override
 	public void addEdge(E source, E dest, int cost) {
 		addEdge(source, dest, (int) cost);
 	}
 
+	/** @author Dmitry Dolgopolov */
 	// Function to remove an edge into the graph
 	@Override
 	public boolean remove(E src, E dest) {
-		// removed the new Edge, so later we can undo it
-		// adjList.get(dst.data).second;
 
 		// in case they are not there, we do not even delete
 		if (!vertexSet.containsKey(src) || !vertexSet.containsKey(dest))
@@ -67,6 +64,7 @@ public class EulerGraph<E extends Comparable<E>> extends Graph<E> {
 		return super.remove(src, dest);
 	}
 
+	/** @author Dmitry Dolgopolov */
 	// just can undo the last step. Nothing more;
 	public boolean undo() {
 		// we delete the last step from the Queue
@@ -90,6 +88,7 @@ public class EulerGraph<E extends Comparable<E>> extends Graph<E> {
 
 	}
 
+	/** @author Mher Torjyan*/
 	public void findEulerPath() { // find Euler path using fleury algorithm
 
 		int numOddVertexes = 0;
@@ -145,12 +144,6 @@ public class EulerGraph<E extends Comparable<E>> extends Graph<E> {
 	
 	
 	
-	private Map<Integer, String> indexToName;
-
-	public void setIndexToName(Map<Integer, String> map) {
-		indexToName = map;
-	}
-
 	enum Operation {
 		ADDED, REMOVED
 	}

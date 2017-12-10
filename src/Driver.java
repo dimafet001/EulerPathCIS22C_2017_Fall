@@ -192,10 +192,6 @@ public class Driver {
 				continue;//we just ask once again
 			}
 			
-			// TODO: Traversals [DFT, BFT]
-			// fix Remove
-			// delete the flight
-			
 			a.showAdjTable();
 		} while (choice != -1);
 
