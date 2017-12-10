@@ -92,7 +92,7 @@ public class Driver {
 				break;
 			case 4:
 				System.out.println("1 : Display to console \n "
-								+ "2 : Display to File");
+								+ "2 : Output the Adjacency List to a File");
 				int sc = userScanner.nextInt();
 				
 				switch (sc) {
@@ -127,9 +127,7 @@ public class Driver {
 						break;
 					}
 					break;
-				case 2:
-					// TODO: make everything work
-					System.out.println("Coming Soon");
+				case 2://output adjTable to a file (new or old)
 					
 					// Trying to open the file
 					PrintWriter pw = null;
