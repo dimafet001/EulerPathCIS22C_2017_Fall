@@ -25,7 +25,7 @@ public class EulerGraph<E> extends Graph<E> {
 		super.addEdge(source, dest, cost);
 
 		// added the new Edge, so later we can undo it
-		if (!justUndid) 
+		if (!justUndid)
 			steps.add(new Step<E>(source, dest, cost, Operation.ADDED));
 		justUndid = false;
 	}
@@ -44,8 +44,7 @@ public class EulerGraph<E> extends Graph<E> {
 		// in case they are not there, we do not even delete
 		if (!vertexSet.containsKey(src) || !vertexSet.containsKey(dest))
 			return false;
-		
-		
+
 		// finding the weight
 		double weight = 0;
 
@@ -61,11 +60,10 @@ public class EulerGraph<E> extends Graph<E> {
 			}
 		}
 
-		if (!justUndid) 
+		if (!justUndid)
 			steps.add(new Step<E>(src, dest, weight, Operation.REMOVED));
 		justUndid = false;
-		
-		
+
 		return super.remove(src, dest);
 	}
 
@@ -74,10 +72,11 @@ public class EulerGraph<E> extends Graph<E> {
 		// we delete the last step from the Queue
 		// at the same time we save it into the object
 		// so we can still use it
-		if (steps.isEmpty()) return false;
-		
+		if (steps.isEmpty())
+			return false;
+
 		justUndid = true;
-		
+
 		Step<E> lastStep = steps.pop();
 
 		// if we added we remove and viceversa
@@ -86,7 +85,7 @@ public class EulerGraph<E> extends Graph<E> {
 		else if (lastStep.getOperation().equals(Operation.REMOVED)) {
 			addEdge(lastStep.getSrc(), lastStep.getDst(), lastStep.getWeight());
 		}
-		
+
 		return true;
 
 	}
@@ -96,34 +95,44 @@ public class EulerGraph<E> extends Graph<E> {
 		int numOddVertexes = 0;
 		int numVertex = 0;
 		Iterator<Entry<E, Vertex<E>>> iter;
-		Entry<E, Vertex<E>> startVertex;
+		Entry<E, Vertex<E>> startVertex = null;
 		iter = vertexSet.entrySet().iterator();
 		while (iter.hasNext()) {
 			numVertex++;
 			Entry<E, Vertex<E>> a = iter.next();
-			if(a.getValue().adjList.size() % 2!=0) {
+			if (a.getValue().adjList.size() % 2 != 0) {
 				numOddVertexes++;
 				startVertex = a;
-				
 			}
 		}
-		if(numOddVertexes != 0 && numOddVertexes!= 2) {
+		if (numOddVertexes != 0 && numOddVertexes != 2) {
 			System.out.println("Graph is not solvable.");
 			return;
 		}
-		
-		System.out.println(startVertex.getValue());
-		
-		Queue<Vertex>[] tempList = (Queue<Vertex>[]) new Queue[numVertex];
-		
-		for (int i = 0 ; i < numVertex ; i++) {
-		//	tempList[i] = new Queue<Vertex>;
+
+		System.out.println(numVertex);
+		LinkedQueue<Vertex>[] adjQueue = new LinkedQueue[numVertex];
+		for (int i = 0; i < numVertex; i++) {
+			adjQueue[i] = new LinkedQueue<Vertex>();
 		}
 		
 		
+		
+		Iterator<Entry<E, Vertex<E>>> newIter = vertexSet.entrySet().iterator();
+		while (newIter.hasNext()) {
+			
+//			Iterator<Entry<E, Pair<Vertex<E>, Double>>> newIter2 = vertexSet.get(newIter.next().getKey()).iterator();
+			Iterator<Entry<E, Pair<Vertex<E>, Double>>> newIter2 = newIter.next().getValue().iterator();
+			Entry<E, Pair<Vertex<E>, Double>> entry = newIter2.next();
+			System.out.println(entry.getValue().first.data);
+			
+			
+			
+		}
+			
+	
+
 	}
-
-
 
 	private Map<Integer, String> indexToName;
 
