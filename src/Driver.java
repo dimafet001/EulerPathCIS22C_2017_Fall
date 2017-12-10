@@ -5,7 +5,7 @@ import java.io.PrintWriter;
 import java.util.Scanner;
 
 /**
- * @author Dmitry Dolgopolov (main and EulerGraph work), Shiyu Zhang (data part and files), 
+ * @author Dmitry Dolgopolov (main and EulerGraph work), Shiyu Zhang (data, input, output), 
  * 			Mher Torjyan (menu and Graph work)
  *
  */
@@ -29,7 +29,7 @@ public class Driver {
 	}
 
 	/**
-	 * @author Mher Torjyan, Dmitry Dolgopolov
+	 * @author Mher Torjyan, Dmitry Dolgopolov, Shiyu Zhang
 	 */
 	public static void mainMenu(EulerGraph a) { // GRAPH IS PLACEHOLDER
 		
