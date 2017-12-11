@@ -4,6 +4,7 @@ import java.util.Stack;
 
 /*
 
+	(more recent description of the project is in Driver.java
  *  -Name of program : Final Project
 
       -Programmer's name: Dmitry Dolgopolov (main and EulerGraph work), Shiyu Zhang (input), 
