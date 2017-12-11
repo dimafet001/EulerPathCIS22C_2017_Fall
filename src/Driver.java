@@ -6,17 +6,22 @@ import java.io.PrintWriter;
 import java.util.Scanner;
 
 /**
- * @author Dmitry Dolgopolov (main and EulerGraph work), Shiyu Zhang (data, input, output), 
- * 			Mher Torjyan (menu and Graph work)
+
+ *  -Name of program : Final Project
+
+      -Programmer's name: Dmitry Dolgopolov (main and EulerGraph work, output), Shiyu Zhang (input), 
+ * 			Mher Torjyan (menu and Graph work , output), Dongbo Liu(miscellaneous help)
  * 
- * The final exam for CIS22C in Java Fall 2017
- * 
- * The program stores the flights in the Graph.
- * It can parse it from a file and output it to the file, too.
- * Also, we can find a EulerPath (if exists) that passes thru
- * 	all the edges once.
- *
+      -Current Date: 12/08/17
+
+      -Computer operating system and compiler you are using : MAC OSX
+
+      -Brief description of the program (1-5 sentences) : The program stores the flights in the Graph.
+  		It can parse it from a file and output it to the file, too.
+  		Also, we can find a EulerPath (if exists) that passes thru
+ 		all the edges once.
  */
+
 public class Driver {
 	
 
@@ -29,8 +34,12 @@ public class Driver {
 		
 		// setting up the Graph object
 		curGraph = new EulerGraph<String>();
-		fillPath(openInputFile(), curGraph);
-		mainMenu(curGraph);
+		userScanner = openInputFile();
+		if(userScanner != null) {
+			fillPath(userScanner, curGraph);
+			mainMenu(curGraph);
+		}
+		
 	}
 
 	/**
@@ -201,7 +210,7 @@ public class Driver {
 		return in.nextInt();
 	}
 	
-	/** @author Dmitry Dolgopolov, Shiyu Zhang
+	/** @author Dmitry Dolgopolov
 	 *  This method gets the object of a starting vertex and checks if it exists
 	 */
 	public static String chooseStartingVertex(Scanner in) {
@@ -256,7 +265,7 @@ public class Driver {
 		return temp;
 	}
 	
-	/** @author Shiyu Zhang, Dmitry Dolgopolov
+	/** @author Dmitry Dolgopolov
 	 * 	
 	 * 	This method outputs to an existing file or creates one and outputs there
 	 * 
@@ -306,3 +315,567 @@ public class Driver {
 	}
 
 }
+
+/*
+
+Please enter the input file name: (Ex. input1.txt)
+input1.txt
+Welcome to Euler's Algorithm 
+-1 : Exit.
+1 : Add a New Flight to the Graph. (You are not allowed to enter existing connections)
+2 : Delete Airport from graph.
+3 : Undo last move.
+4 : Output.
+5 : Show Eulers Solution.
+6 : Input Another File.
+
+
+Please enter your choice:4
+1 : Display to console 
+ 2 : Output the Adjacency List to a File
+1
+1 : Output using Depth-First Traversal
+2 : Output using Breadth-First Traversal
+3 : Output Adjacency List
+3
+------------------------ 
+Adj List for PHX: SLC(12.0) MSP(24.0) 
+Adj List for LAX: SJC(8.0) SFO(12.0) 
+Adj List for DCA: DTW(9.0) ATL(12.0) 
+Adj List for DTW: DCA(9.0) YYZ(5.0) 
+Adj List for BOS: PBI(30.0) SFO(36.0) 
+Adj List for SAT: ATL(13.0) MSP(23.0) 
+Adj List for SLC: PHX(12.0) JFK(30.0) 
+Adj List for MSP: PHX(24.0) SAT(23.0) 
+Adj List for SJC: LAX(8.0) 
+Adj List for JFK: PBI(35.0) SLC(30.0) 
+Adj List for CVG: YYZ(13.0) LAS(29.0) 
+Adj List for PBI: BOS(30.0) JFK(35.0) 
+Adj List for ATL: DCA(12.0) SAT(13.0) 
+Adj List for YYZ: CVG(13.0) DTW(5.0) 
+Adj List for SFO: LAX(12.0) BOS(36.0) 
+Adj List for LAS: CVG(29.0) 
+
+Welcome to Euler's Algorithm 
+-1 : Exit.
+1 : Add a New Flight to the Graph. (You are not allowed to enter existing connections)
+2 : Delete Airport from graph.
+3 : Undo last move.
+4 : Output.
+5 : Show Eulers Solution.
+6 : Input Another File.
+
+
+Please enter your choice:1
+Where is the flight from?
+SFO
+Where is the flight to?
+POR
+How far are the two airports?
+16
+Welcome to Euler's Algorithm 
+-1 : Exit.
+1 : Add a New Flight to the Graph. (You are not allowed to enter existing connections)
+2 : Delete Airport from graph.
+3 : Undo last move.
+4 : Output.
+5 : Show Eulers Solution.
+6 : Input Another File.
+
+
+Please enter your choice:4
+1 : Display to console 
+ 2 : Output the Adjacency List to a File
+1
+1 : Output using Depth-First Traversal
+2 : Output using Breadth-First Traversal
+3 : Output Adjacency List
+3
+------------------------ 
+Adj List for PHX: SLC(12.0) MSP(24.0) 
+Adj List for LAX: SJC(8.0) SFO(12.0) 
+Adj List for DCA: DTW(9.0) ATL(12.0) 
+Adj List for DTW: DCA(9.0) YYZ(5.0) 
+Adj List for BOS: PBI(30.0) SFO(36.0) 
+Adj List for SAT: ATL(13.0) MSP(23.0) 
+Adj List for SLC: PHX(12.0) JFK(30.0) 
+Adj List for MSP: PHX(24.0) SAT(23.0) 
+Adj List for SJC: LAX(8.0) 
+Adj List for JFK: PBI(35.0) SLC(30.0) 
+Adj List for POR: SFO(16.0) 
+Adj List for CVG: YYZ(13.0) LAS(29.0) 
+Adj List for PBI: BOS(30.0) JFK(35.0) 
+Adj List for ATL: DCA(12.0) SAT(13.0) 
+Adj List for YYZ: CVG(13.0) DTW(5.0) 
+Adj List for SFO: LAX(12.0) POR(16.0) BOS(36.0) 
+Adj List for LAS: CVG(29.0) 
+
+Welcome to Euler's Algorithm 
+-1 : Exit.
+1 : Add a New Flight to the Graph. (You are not allowed to enter existing connections)
+2 : Delete Airport from graph.
+3 : Undo last move.
+4 : Output.
+5 : Show Eulers Solution.
+6 : Input Another File.
+
+
+Please enter your choice:2
+Where are you removing from?
+YYZ
+Where was the flight to?
+CVG
+Successfully removed
+Welcome to Euler's Algorithm 
+-1 : Exit.
+1 : Add a New Flight to the Graph. (You are not allowed to enter existing connections)
+2 : Delete Airport from graph.
+3 : Undo last move.
+4 : Output.
+5 : Show Eulers Solution.
+6 : Input Another File.
+
+
+Please enter your choice:4
+1 : Display to console 
+ 2 : Output the Adjacency List to a File
+1
+1 : Output using Depth-First Traversal
+2 : Output using Breadth-First Traversal
+3 : Output Adjacency List
+3
+------------------------ 
+Adj List for PHX: SLC(12.0) MSP(24.0) 
+Adj List for LAX: SJC(8.0) SFO(12.0) 
+Adj List for DCA: DTW(9.0) ATL(12.0) 
+Adj List for DTW: DCA(9.0) YYZ(5.0) 
+Adj List for BOS: PBI(30.0) SFO(36.0) 
+Adj List for SAT: ATL(13.0) MSP(23.0) 
+Adj List for SLC: PHX(12.0) JFK(30.0) 
+Adj List for MSP: PHX(24.0) SAT(23.0) 
+Adj List for SJC: LAX(8.0) 
+Adj List for JFK: PBI(35.0) SLC(30.0) 
+Adj List for POR: SFO(16.0) 
+Adj List for CVG: LAS(29.0) 
+Adj List for PBI: BOS(30.0) JFK(35.0) 
+Adj List for ATL: DCA(12.0) SAT(13.0) 
+Adj List for YYZ: DTW(5.0) 
+Adj List for SFO: LAX(12.0) POR(16.0) BOS(36.0) 
+Adj List for LAS: CVG(29.0) 
+
+Welcome to Euler's Algorithm 
+-1 : Exit.
+1 : Add a New Flight to the Graph. (You are not allowed to enter existing connections)
+2 : Delete Airport from graph.
+3 : Undo last move.
+4 : Output.
+5 : Show Eulers Solution.
+6 : Input Another File.
+
+
+Please enter your choice:3
+Successfully undid last move
+Welcome to Euler's Algorithm 
+-1 : Exit.
+1 : Add a New Flight to the Graph. (You are not allowed to enter existing connections)
+2 : Delete Airport from graph.
+3 : Undo last move.
+4 : Output.
+5 : Show Eulers Solution.
+6 : Input Another File.
+
+
+Please enter your choice:4
+1 : Display to console 
+ 2 : Output the Adjacency List to a File
+1
+1 : Output using Depth-First Traversal
+2 : Output using Breadth-First Traversal
+3 : Output Adjacency List
+3
+------------------------ 
+Adj List for PHX: SLC(12.0) MSP(24.0) 
+Adj List for LAX: SJC(8.0) SFO(12.0) 
+Adj List for DCA: DTW(9.0) ATL(12.0) 
+Adj List for DTW: DCA(9.0) YYZ(5.0) 
+Adj List for BOS: PBI(30.0) SFO(36.0) 
+Adj List for SAT: ATL(13.0) MSP(23.0) 
+Adj List for SLC: PHX(12.0) JFK(30.0) 
+Adj List for MSP: PHX(24.0) SAT(23.0) 
+Adj List for SJC: LAX(8.0) 
+Adj List for JFK: PBI(35.0) SLC(30.0) 
+Adj List for POR: SFO(16.0) 
+Adj List for CVG: YYZ(13.0) LAS(29.0) 
+Adj List for PBI: BOS(30.0) JFK(35.0) 
+Adj List for ATL: DCA(12.0) SAT(13.0) 
+Adj List for YYZ: CVG(13.0) DTW(5.0) 
+Adj List for SFO: LAX(12.0) POR(16.0) BOS(36.0) 
+Adj List for LAS: CVG(29.0) 
+
+Welcome to Euler's Algorithm 
+-1 : Exit.
+1 : Add a New Flight to the Graph. (You are not allowed to enter existing connections)
+2 : Delete Airport from graph.
+3 : Undo last move.
+4 : Output.
+5 : Show Eulers Solution.
+6 : Input Another File.
+
+
+Please enter your choice:3
+Successfully undid last move
+Welcome to Euler's Algorithm 
+-1 : Exit.
+1 : Add a New Flight to the Graph. (You are not allowed to enter existing connections)
+2 : Delete Airport from graph.
+3 : Undo last move.
+4 : Output.
+5 : Show Eulers Solution.
+6 : Input Another File.
+
+
+Please enter your choice:4
+1 : Display to console 
+ 2 : Output the Adjacency List to a File
+1
+1 : Output using Depth-First Traversal
+2 : Output using Breadth-First Traversal
+3 : Output Adjacency List
+3
+------------------------ 
+Adj List for PHX: SLC(12.0) MSP(24.0) 
+Adj List for LAX: SJC(8.0) SFO(12.0) 
+Adj List for DCA: DTW(9.0) ATL(12.0) 
+Adj List for DTW: DCA(9.0) YYZ(5.0) 
+Adj List for BOS: PBI(30.0) SFO(36.0) 
+Adj List for SAT: ATL(13.0) MSP(23.0) 
+Adj List for SLC: PHX(12.0) JFK(30.0) 
+Adj List for MSP: PHX(24.0) SAT(23.0) 
+Adj List for SJC: LAX(8.0) 
+Adj List for JFK: PBI(35.0) SLC(30.0) 
+Adj List for POR: 
+Adj List for CVG: YYZ(13.0) LAS(29.0) 
+Adj List for PBI: BOS(30.0) JFK(35.0) 
+Adj List for ATL: DCA(12.0) SAT(13.0) 
+Adj List for YYZ: CVG(13.0) DTW(5.0) 
+Adj List for SFO: LAX(12.0) BOS(36.0) 
+Adj List for LAS: CVG(29.0) 
+
+Welcome to Euler's Algorithm 
+-1 : Exit.
+1 : Add a New Flight to the Graph. (You are not allowed to enter existing connections)
+2 : Delete Airport from graph.
+3 : Undo last move.
+4 : Output.
+5 : Show Eulers Solution.
+6 : Input Another File.
+
+
+Please enter your choice:1
+Where is the flight from?
+LAS
+Where is the flight to?
+AXY
+How far are the two airports?
+90
+Welcome to Euler's Algorithm 
+-1 : Exit.
+1 : Add a New Flight to the Graph. (You are not allowed to enter existing connections)
+2 : Delete Airport from graph.
+3 : Undo last move.
+4 : Output.
+5 : Show Eulers Solution.
+6 : Input Another File.
+
+
+Please enter your choice:4
+1 : Display to console 
+ 2 : Output the Adjacency List to a File
+1
+1 : Output using Depth-First Traversal
+2 : Output using Breadth-First Traversal
+3 : Output Adjacency List
+1
+
+From where: SFO
+Data: SFO
+SFO
+LAX
+SJC
+BOS
+PBI
+JFK
+SLC
+PHX
+MSP
+SAT
+ATL
+DCA
+DTW
+YYZ
+CVG
+LAS
+AXY
+Welcome to Euler's Algorithm 
+-1 : Exit.
+1 : Add a New Flight to the Graph. (You are not allowed to enter existing connections)
+2 : Delete Airport from graph.
+3 : Undo last move.
+4 : Output.
+5 : Show Eulers Solution.
+6 : Input Another File.
+
+
+Please enter your choice:3
+Successfully undid last move
+Welcome to Euler's Algorithm 
+-1 : Exit.
+1 : Add a New Flight to the Graph. (You are not allowed to enter existing connections)
+2 : Delete Airport from graph.
+3 : Undo last move.
+4 : Output.
+5 : Show Eulers Solution.
+6 : Input Another File.
+
+
+Please enter your choice:4
+1 : Display to console 
+ 2 : Output the Adjacency List to a File
+1
+1 : Output using Depth-First Traversal
+2 : Output using Breadth-First Traversal
+3 : Output Adjacency List
+2
+
+From where: SFO
+SFO
+LAX
+BOS
+SJC
+PBI
+JFK
+SLC
+PHX
+MSP
+SAT
+ATL
+DCA
+DTW
+YYZ
+CVG
+LAS
+Welcome to Euler's Algorithm 
+-1 : Exit.
+1 : Add a New Flight to the Graph. (You are not allowed to enter existing connections)
+2 : Delete Airport from graph.
+3 : Undo last move.
+4 : Output.
+5 : Show Eulers Solution.
+6 : Input Another File.
+
+
+Please enter your choice:5
+
+LAS-CVG-YYZ-DTW-DCA-ATL-SAT-MSP-PHX-SLC-JFK-PBI-BOS-SFO-LAX-SJC
+Do you want to output the Euler path to a file as well? (Y/N)
+Y
+Where do you want to output it? (Ex. output.txt [is a file in the project])
+input1OUTPUT.txt
+Welcome to Euler's Algorithm 
+-1 : Exit.
+1 : Add a New Flight to the Graph. (You are not allowed to enter existing connections)
+2 : Delete Airport from graph.
+3 : Undo last move.
+4 : Output.
+5 : Show Eulers Solution.
+6 : Input Another File.
+
+
+Please enter your choice:4
+1 : Display to console 
+ 2 : Output the Adjacency List to a File
+2
+Where do you want to output it? (Ex. output.txt [is a file in the project])
+adjInput1OUTPUT.txt
+Successfully outputted to a file
+Welcome to Euler's Algorithm 
+-1 : Exit.
+1 : Add a New Flight to the Graph. (You are not allowed to enter existing connections)
+2 : Delete Airport from graph.
+3 : Undo last move.
+4 : Output.
+5 : Show Eulers Solution.
+6 : Input Another File.
+
+
+Please enter your choice:6
+
+Please enter the input file name: (Ex. input1.txt)
+input2.txt
+Changed the input file
+Welcome to Euler's Algorithm 
+-1 : Exit.
+1 : Add a New Flight to the Graph. (You are not allowed to enter existing connections)
+2 : Delete Airport from graph.
+3 : Undo last move.
+4 : Output.
+5 : Show Eulers Solution.
+6 : Input Another File.
+
+
+Please enter your choice:4
+1 : Display to console 
+ 2 : Output the Adjacency List to a File
+1
+1 : Output using Depth-First Traversal
+2 : Output using Breadth-First Traversal
+3 : Output Adjacency List
+3
+------------------------ 
+Adj List for New York(JFK): Phoenix(PHX)(18.0) Boston(BOS)(8.0) West Palm Beach(PBI)(5.0) 
+Adj List for Seattle-Tacoma (SEA): Salt Lake City(SLC)(11.0) San Jose (SJC)(12.0) 
+Adj List for San Jose (SJC): Las Vegas(LAX)(8.0) Seattle-Tacoma (SEA)(12.0) 
+Adj List for Phoenix(PHX): Salt Lake City(SLC)(20.0) San Francisco(SFO)(14.0) New York(JFK)(18.0) West Palm Beach(PBI)(16.0) 
+Adj List for Las Vegas(LAX): Salt Lake City(SLC)(10.0) San Francisco(SFO)(8.0) San Jose (SJC)(8.0) 
+Adj List for Boston(BOS): Salt Lake City(SLC)(32.0) New York(JFK)(8.0) 
+Adj List for Salt Lake City(SLC): Phoenix(PHX)(20.0) Las Vegas(LAX)(10.0) Boston(BOS)(32.0) Seattle-Tacoma (SEA)(11.0) 
+Adj List for San Francisco(SFO): Phoenix(PHX)(14.0) Las Vegas(LAX)(8.0) 
+Adj List for West Palm Beach(PBI): Phoenix(PHX)(16.0) New York(JFK)(5.0) 
+
+Welcome to Euler's Algorithm 
+-1 : Exit.
+1 : Add a New Flight to the Graph. (You are not allowed to enter existing connections)
+2 : Delete Airport from graph.
+3 : Undo last move.
+4 : Output.
+5 : Show Eulers Solution.
+6 : Input Another File.
+
+
+Please enter your choice:6
+
+Please enter the input file name: (Ex. input1.txt)
+input3.txt
+Changed the input file
+Welcome to Euler's Algorithm 
+-1 : Exit.
+1 : Add a New Flight to the Graph. (You are not allowed to enter existing connections)
+2 : Delete Airport from graph.
+3 : Undo last move.
+4 : Output.
+5 : Show Eulers Solution.
+6 : Input Another File.
+
+
+Please enter your choice:4
+1 : Display to console 
+ 2 : Output the Adjacency List to a File
+1
+1 : Output using Depth-First Traversal
+2 : Output using Breadth-First Traversal
+3 : Output Adjacency List
+3
+------------------------ 
+Adj List for 1: 2(0.0) 
+Adj List for 2: 1(0.0) 3(0.0) 4(0.0) 8(0.0) 
+Adj List for 3: 2(0.0) 4(0.0) 
+Adj List for 4: 2(0.0) 3(0.0) 
+Adj List for 8: 2(0.0) 
+
+Welcome to Euler's Algorithm 
+-1 : Exit.
+1 : Add a New Flight to the Graph. (You are not allowed to enter existing connections)
+2 : Delete Airport from graph.
+3 : Undo last move.
+4 : Output.
+5 : Show Eulers Solution.
+6 : Input Another File.
+
+
+Please enter your choice:5
+
+8-2-3-4-2-1
+Do you want to output the Euler path to a file as well? (Y/N)
+N
+As you wish
+Welcome to Euler's Algorithm 
+-1 : Exit.
+1 : Add a New Flight to the Graph. (You are not allowed to enter existing connections)
+2 : Delete Airport from graph.
+3 : Undo last move.
+4 : Output.
+5 : Show Eulers Solution.
+6 : Input Another File.
+
+
+Please enter your choice:-1
+Exiting
+Goodbye.
+
+
+Please enter the input file name: (Ex. input1.txt)
+input4.txt
+Welcome to Euler's Algorithm 
+-1 : Exit.
+1 : Add a New Flight to the Graph. (You are not allowed to enter existing connections)
+2 : Delete Airport from graph.
+3 : Undo last move.
+4 : Output.
+5 : Show Eulers Solution.
+6 : Input Another File.
+
+
+Please enter your choice:4
+1 : Display to console 
+ 2 : Output the Adjacency List to a File
+1
+1 : Output using Depth-First Traversal
+2 : Output using Breadth-First Traversal
+3 : Output Adjacency List
+3
+------------------------ 
+Adj List for 1: 2(0.0) 3(0.0) 9(0.0) 10(0.0) 
+Adj List for 2: 1(0.0) 7(0.0) 9(0.0) 
+Adj List for 3: 1(0.0) 4(0.0) 
+Adj List for 4: 3(0.0) 5(0.0) 7(0.0) 
+Adj List for 5: 4(0.0) 6(0.0) 
+Adj List for 6: 5(0.0) 7(0.0) 
+Adj List for 7: 2(0.0) 4(0.0) 6(0.0) 8(0.0) 
+Adj List for 8: 7(0.0) 
+Adj List for 9: 1(0.0) 2(0.0) 10(0.0) 
+Adj List for 10: 1(0.0) 9(0.0) 
+
+Welcome to Euler's Algorithm 
+-1 : Exit.
+1 : Add a New Flight to the Graph. (You are not allowed to enter existing connections)
+2 : Delete Airport from graph.
+3 : Undo last move.
+4 : Output.
+5 : Show Eulers Solution.
+6 : Input Another File.
+
+
+Please enter your choice:5
+
+Graph is not solvable.
+Welcome to Euler's Algorithm 
+-1 : Exit.
+1 : Add a New Flight to the Graph. (You are not allowed to enter existing connections)
+2 : Delete Airport from graph.
+3 : Undo last move.
+4 : Output.
+5 : Show Eulers Solution.
+6 : Input Another File.
+
+
+Please enter your choice:-1
+Exiting
+Goodbye.
+
+
+Please enter the input file name: (Ex. input1.txt)
+DOES NOT EXIST.txt
+DOES (No such file or directory)
+
+*/
+ 

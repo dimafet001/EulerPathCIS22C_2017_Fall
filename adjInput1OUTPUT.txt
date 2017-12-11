@@ -1,0 +1,18 @@
+Adj List for PHX: SLC(12.0) MSP(24.0) 
+Adj List for LAX: SJC(8.0) SFO(12.0) 
+Adj List for AXY: 
+Adj List for DCA: DTW(9.0) ATL(12.0) 
+Adj List for DTW: DCA(9.0) YYZ(5.0) 
+Adj List for BOS: PBI(30.0) SFO(36.0) 
+Adj List for SAT: ATL(13.0) MSP(23.0) 
+Adj List for SLC: PHX(12.0) JFK(30.0) 
+Adj List for MSP: PHX(24.0) SAT(23.0) 
+Adj List for SJC: LAX(8.0) 
+Adj List for JFK: PBI(35.0) SLC(30.0) 
+Adj List for POR: 
+Adj List for CVG: YYZ(13.0) LAS(29.0) 
+Adj List for PBI: BOS(30.0) JFK(35.0) 
+Adj List for ATL: DCA(12.0) SAT(13.0) 
+Adj List for YYZ: CVG(13.0) DTW(5.0) 
+Adj List for SFO: LAX(12.0) BOS(36.0) 
+Adj List for LAS: CVG(29.0) 
