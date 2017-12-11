@@ -3,7 +3,7 @@ import java.util.Map.Entry;
 import java.util.Stack;
 
 /**
- * @author Dolgopolov Dmitry, Mher Torjyan, 
+ * @author Dolgopolov Dmitry, Mher Torjyan, Shiyu Zhang (some of the method descriptions)
  * 	Dongbo Liu (the original file for the presentation was made by him)
  *
  * @param <E extends Comparable<E>>
@@ -17,7 +17,12 @@ public class EulerGraph<E extends Comparable<E>> extends Graph<E> {
 	// for not repeating the steps and looping forever
 	private boolean justUndid = false;
 
-	/** @author Dmitry Dolgopolov */
+	/** @author Dmitry Dolgopolov
+	* Method Name:addEdge
+	 * Parameter:source(E), dest(E), cost(double)
+	 * Description: This method adds a edge to the Euler path.
+	 * Return Value: none
+	 */
 	// Function to add an edge into the graph
 	@Override
 	public void addEdge(E source, E dest, double cost) {
@@ -34,8 +39,12 @@ public class EulerGraph<E extends Comparable<E>> extends Graph<E> {
 		addEdge(source, dest, (int) cost);
 	}
 
-	/** @author Dmitry Dolgopolov */
-	// Function to remove an edge into the graph
+	/** @author Dmitry Dolgopolov 
+	* Method Name:addEdge
+	 * Parameter:src(E), dest(E)
+	 * Description: This method removes a edge to the Euler path.
+	 * Return Value: boolean
+	 */
 	@Override
 	public boolean remove(E src, E dest) {
 
@@ -67,8 +76,12 @@ public class EulerGraph<E extends Comparable<E>> extends Graph<E> {
 		return super.remove(src, dest);
 	}
 
-	/** @author Dmitry Dolgopolov */
-	// just can undo the last step. Nothing more;
+	/** @author Dmitry Dolgopolov
+	 * Method Name: undo
+	 * Parameter:none
+	 * Description: This method undo the previous action.
+	 * Return Value: boolean
+	 */
 	public boolean undo() {
 		// we delete the last step from the Queue
 		// at the same time we save it into the object
@@ -149,7 +162,11 @@ public class EulerGraph<E extends Comparable<E>> extends Graph<E> {
 		return findPath(adjList, startVertex.getKey(), finalPath, adjList.getLength(), false);
 	}
 	
-	//Recursive Method which computes Euler Path
+	/**
+	 * @author Mher Torjyan, Dolgopolov Dmitry (20%)
+	 * 
+	 * This method is recursive Method which computes Euler Path.
+	*/
 	private String findPath(LList<Pair> input, E curVertex, Stack<E> path, int totalEdgeNumber, boolean isBackTracking) {
 		//Final return string
 		String resString = "";
@@ -214,9 +231,9 @@ public class EulerGraph<E extends Comparable<E>> extends Graph<E> {
 
 		private E src, dst;
 		private double weight;
-		// // when we are in the start and there was no operation
-		// // when we added
-		// // when we removed
+		 // when we are in the start and there was no operation
+		 // when we added
+		 // when we removed
 
 		private Operation oper;
 
