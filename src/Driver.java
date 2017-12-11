@@ -195,7 +195,11 @@ public class Driver {
 		Scanner temp = null;
 
 		System.out.println("\nPlease enter the input file name: (Ex. input1.txt)");
+<<<<<<< HEAD
 	//	filename = "/Users/m_torjyan/Documents/EulerPathCIS22C_2017_Fall/input4.txt";
+=======
+//		filename = "/Users/m_torjyan/Documents/EulerPathCIS22C_2017_Fall/input4.txt";
+>>>>>>> 1a943e77c9ecece69d5acdced55fb27e0752e06f
 	//	filename = "/Users/dimafet/Documents/workspace/EulerPathCIS22C_2017_Fall/input3.txt";
 //		filename = "input1.txt";
 		filename = userScanner.next();

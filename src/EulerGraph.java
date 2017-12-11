@@ -133,14 +133,8 @@ public class EulerGraph<E extends Comparable<E>> extends Graph<E> {
 		// finalPath = findPath(adjList, startVertex.getKey(), finalPath);
 
 		
-		String strPath = findPath(adjList, startVertex.getKey(), finalPath, adjList.getLength(), false);
 
-
-		// while (!finalPath.isEmpty()) {
-		// System.out.println(finalPath.dequeue());
-		// }
-
-		System.out.println(strPath);
+		System.out.println(findPath(adjList, startVertex.getKey(), finalPath, adjList.getLength(), false));
 
 		//System.out.println(strPath);
 	}
@@ -148,14 +142,8 @@ public class EulerGraph<E extends Comparable<E>> extends Graph<E> {
 	private String findPath(LList<Pair> input, E curVertex, Stack<E> path, int totalEdgeNumber, boolean isBackTracking) {
 
 		String resString = "";
-		
-		System.out.println("---------------------SOLUTION---------------------");
-		System.out.println("CURRENT VERTEX: " + curVertex);
-		for (int i = 1; i < input.getLength() + 1; i++) {
-			System.out.println("First: " + input.getEntry(i).first + " " + input.getEntry(i).second);
-		}
-		
 		String realCurVertex = "";
+		
 		if (input.getLength() == 0 && path.size() == totalEdgeNumber - 1 ) {
 			return curVertex.toString();
 		} else {
@@ -192,44 +180,6 @@ public class EulerGraph<E extends Comparable<E>> extends Graph<E> {
 			//return resString;
 		}
 	}
-
-	/*private String findPath(LList<Pair> input, E startVertex, LinkedQueue<E> path, int totalEdgeNumber) {
-
-		System.out.println("---------------------SOLUTION---------------------");
-		
-		System.out.println("CURRENT VERTEX: " + startVertex);
-		for (int i = 1; i < input.getLength() + 1; i++) {
-			System.out.println("First: " + input.getEntry(i).first + " " + input.getEntry(i).second);
-		}
-
-		if (input.getLength() == 0 && path.size() == totalEdgeNumber ) {
-			return "";
-		} else {
-			for (int i = 1; i < input.getLength() + 1; i++) {
-				if (startVertex.equals(input.getEntry(i).first)) {
-					startVertex = (E) input.getEntry(i).second;
-					path.push(startVertex);
-					prevTravered.push(input.getEntry(i));
-					input.remove(i);
-					return startVertex.toString() + " "
-							+ findPath(input, startVertex, path, totalEdgeNumber, prevTravered);
-
-				} else if (startVertex.equals(input.getEntry(i).second)) {
-					startVertex = (E) input.getEntry(i).first;
-					path.push(startVertex);
-					prevTravered.push(input.getEntry(i));
-					input.remove(i);
-					return startVertex.toString() + " "
-							+ findPath(input, startVertex, path, totalEdgeNumber, prevTravered);
-				}
-			}
-			System.out.println("POPPING: " + path.pop());
-			Pair p = prevTravered.pop();
-			input.add(p);
-			return findPath(input, (E)p.second, path, totalEdgeNumber, prevTravered);
-		}
-
-	}*/
 
 	enum Operation {
 		ADDED, REMOVED
