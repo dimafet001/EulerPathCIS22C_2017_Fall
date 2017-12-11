@@ -127,28 +127,57 @@ public class EulerGraph<E extends Comparable<E>> extends Graph<E> {
 			}
 
 		}
-		
-		
 
-		LinkedQueue<E> finalPath = new LinkedQueue<>();
+		LinkedStack<E> finalPath = new LinkedStack<>();
 		// finalPath = findPath(adjList, startVertex.getKey(), finalPath);
 
-		String strPath = findPath(adjList, startVertex.getKey(), finalPath, adjList.getLength());
+		LinkedStack<Pair> trav = new LinkedStack<>();
 
-		// while (!finalPath.isEmpty()) {
-		// System.out.println(finalPath.dequeue());
-		// }
+		String strPath = findPath(adjList, startVertex.getKey(), finalPath, adjList.getLength(), trav);
 
+//		while (!finalPath.isEmpty()) {
+//		?	System.out.println(finalPath.dequeue());
+//		}
+
+		System.out.println(strPath);
 	}
 
+	private String findPath(LList<Pair> input, E startVertex, LinkedStack<E> path, int totalEdgeNumber,
+			LinkedStack<Pair> prevTravered) {
 
-	private String findPath(LList<Pair> input, E curVertex, LinkedQueue<E> path, int totalEdgeNumber) {
+		System.out.println("---------------------SOLUTION---------------------");
 		
-		for(int i = 0 ; i < input.getLength() ; i++) {
-			System.out.println(input.getEntry(i).first + " " + input.getEntry(i).second);
+		System.out.println("CURRENT VERTEX: " + startVertex);
+		for (int i = 1; i < input.getLength() + 1; i++) {
+			System.out.println("First: " + input.getEntry(i).first + " " + input.getEntry(i).second);
 		}
-		
-		return "";
+
+		if (input.getLength() == 0 && path.size() == totalEdgeNumber ) {
+			return "";
+		} else {
+			for (int i = 1; i < input.getLength() + 1; i++) {
+				if (startVertex.equals(input.getEntry(i).first)) {
+					startVertex = (E) input.getEntry(i).second;
+					path.push(startVertex);
+					prevTravered.push(input.getEntry(i));
+					input.remove(i);
+					return startVertex.toString() + " "
+							+ findPath(input, startVertex, path, totalEdgeNumber, prevTravered);
+
+				} else if (startVertex.equals(input.getEntry(i).second)) {
+					startVertex = (E) input.getEntry(i).first;
+					path.push(startVertex);
+					prevTravered.push(input.getEntry(i));
+					input.remove(i);
+					return startVertex.toString() + " "
+							+ findPath(input, startVertex, path, totalEdgeNumber, prevTravered);
+				}
+			}
+			System.out.println("POPPING: " + path.pop());
+			Pair p = prevTravered.pop();
+			input.add(p);
+			return findPath(input, (E)p.second, path, totalEdgeNumber, prevTravered);
+		}
 
 	}
 
