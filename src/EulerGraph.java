@@ -132,49 +132,64 @@ public class EulerGraph<E extends Comparable<E>> extends Graph<E> {
 		Stack<E> finalPath = new Stack<>();
 		// finalPath = findPath(adjList, startVertex.getKey(), finalPath);
 
-
-		String strPath = startVertex.getKey() + " " + findPath(adjList, startVertex.getKey(), finalPath, adjList.getLength());
+		
+		String strPath = findPath(adjList, startVertex.getKey(), finalPath, adjList.getLength(), false);
 
 
 		// while (!finalPath.isEmpty()) {
 		// System.out.println(finalPath.dequeue());
 		// }
-		//System.out.println(strPath);
 
 		System.out.println(strPath);
+
+		//System.out.println(strPath);
 	}
 
-	private String findPath(LList<Pair> input, E curVertex, Stack<E> path, int totalEdgeNumber) {
+	private String findPath(LList<Pair> input, E curVertex, Stack<E> path, int totalEdgeNumber, boolean isBackTracking) {
 
+		String resString = "";
+		
 		System.out.println("---------------------SOLUTION---------------------");
 		System.out.println("CURRENT VERTEX: " + curVertex);
 		for (int i = 1; i < input.getLength() + 1; i++) {
 			System.out.println("First: " + input.getEntry(i).first + " " + input.getEntry(i).second);
 		}
 		
-		
+		String realCurVertex = "";
 		if (input.getLength() == 0 && path.size() == totalEdgeNumber - 1 ) {
-//			return curVertex.toString();
-			return "";
+			return curVertex.toString();
 		} else {
 			for (int i = 1; i < input.getLength() + 1; i++) {
 				if (curVertex.equals(input.getEntry(i).first)) {
+					if(!isBackTracking) {
+						realCurVertex = curVertex.toString();
+					}
 					curVertex = (E) input.getEntry(i).second;
 					path.push(curVertex);
 					input.remove(i);
-					return curVertex.toString() + " " + findPath(input, curVertex, path, totalEdgeNumber);
+					resString = realCurVertex + (!isBackTracking ? "-" : "") + findPath(input, curVertex, path, totalEdgeNumber, false);
+					return resString;
 				} else if (curVertex.equals(input.getEntry(i).second)) {
+					if(!isBackTracking) {	
+						realCurVertex = curVertex.toString();
+						
+					}else {
+						realCurVertex = "";
+					}
 					curVertex = (E) input.getEntry(i).first;
 					path.push(curVertex);
 					input.remove(i);
-					return curVertex.toString() + " " + findPath(input, curVertex, path, totalEdgeNumber);
+					resString = realCurVertex + (!isBackTracking ? "-" : "") + findPath(input, curVertex, path, totalEdgeNumber, false);
+					return resString;
 				}
 			}
-			// here we didn't hit a dead end
+			// here we hit a dead end
 			path.pop();
 			input.add(new Pair(curVertex, path.peek()));
 			curVertex = path.pop();
-			return findPath(input, curVertex, path, totalEdgeNumber);
+			
+			return findPath(input, curVertex, path, totalEdgeNumber, true) ;
+			//return resString;
 		}
 	}
 

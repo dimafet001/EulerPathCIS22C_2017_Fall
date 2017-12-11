@@ -29,7 +29,7 @@ public class Driver {
 	}
 
 	/**
-	 * @author Mher Torjyan, Dmitry Dolgopolov, Shiyu Zhang
+	 * @author Mher Torjyan, Dmitry Dolgopolov
 	 */
 	public static void mainMenu(EulerGraph a) { // GRAPH IS PLACEHOLDER
 		
@@ -240,7 +240,7 @@ public class Driver {
 		Scanner temp = null;
 
 		//System.out.println("\nPlease enter the input file name: (Ex. input1.txt)");
-		filename = "/Users/m_torjyan/Documents/EulerPathCIS22C_2017_Fall/input3.txt";
+		filename = "/Users/m_torjyan/Documents/EulerPathCIS22C_2017_Fall/input4.txt";
 	//	filename = "/Users/dimafet/Documents/workspace/EulerPathCIS22C_2017_Fall/input3.txt";
 //		filename = "input1.txt";
 	//	filename = userScanner.next();
