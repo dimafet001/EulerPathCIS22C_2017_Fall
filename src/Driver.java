@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
@@ -24,8 +25,7 @@ public class Driver {
 		System.out.println();
 		fillPath(openInputFile(), curGraph);
 		curGraph.showAdjTable();
-	//	mainMenu(curGraph);
-		curGraph.findEulerPath();
+		mainMenu(curGraph);
 	}
 
 	/**
@@ -125,7 +125,8 @@ public class Driver {
 						break;
 					}
 					break;
-				case 2:OutPutToFile(a);
+				case 2:
+					outputToFile();
 					break;
 				default:
 					System.out.println("Not valid input. Canceling");
@@ -211,21 +212,52 @@ public class Driver {
 		return temp;
 	}
 	
-		/** @author Shiyu Zhang* */ 	
-	public static void OutPutToFile(EulerGraph a){
-		String filename = null;
-		System.out.print("\nPlease enter the output file name(Ex. output.txt): ");
-		filename = userScanner.nextLine();
+		/** @author Shiyu Zhang, Dmitry Dolgopolov */ 	
+	public static boolean outputToFile(){
+		//output adjTable to a file (new or old)
 		
-		try(FileOutputStream outfile = new FileOutputStream(filename);){			
-			prtWriter = new PrintWriter(outfile, true);
-			a.outputToFile(prtWriter);
-		}catch(IOException e){
-			System.out.println(e.getMessage());
-			return;
+		// Trying to open the file
+		PrintWriter pw = null;
+		try {
+			//"/Users/dimafet/Documents/workspace/EulerPathCIS22C_2017_Fall/output.txt"
+			System.out.println("Where do you want to output it? (Ex. output.txt [a file in the project])");
+			pw = new PrintWriter(userScanner.next());
+		} catch (FileNotFoundException e) {
+			System.out.println("File Not Found.\nDo you want to create a file? (Y/N)");
+			
+			String response = userScanner.next();
+			if (response.equals("Y") || response.equals("y")) {
+
+				System.out.println("Input the file name");
+				File file = new File(userScanner.next());
+
+				// Create the file
+				try {
+					if (file.createNewFile()) {
+						System.out.println("File is created!");
+					} else {
+						System.out.println("File already exists.");
+					}
+				} catch (IOException e2) {
+					System.out.println("Couldn't read file well. Aborting");
+					return false;
+				}
+				
+				
+				try {
+					pw = new PrintWriter(file);
+				} catch (FileNotFoundException e1) {
+					System.out.println("File not found. Canceling");
+					return false;
+				}
+			} else {
+				System.out.println("File not found. Canceling");
+				return false;
+			}
 		}
 		
-		a.outputToFile(prtWriter);
+		curGraph.outputToFile(pw);
+		return true;
 	}
 
 }
