@@ -124,7 +124,11 @@ public class Driver {
 					}
 					break;
 				case 2:
-					outputToFile();
+					// if false, restart it. it didn't work
+					if (outputToFile()) 
+						System.out.println("Successfully outputted to a file");
+					else
+						continue;
 					break;
 				default:
 					System.out.println("Not valid input. Canceling");
@@ -149,7 +153,6 @@ public class Driver {
 				continue;//we just ask once again
 			}
 			
-			a.showAdjTable();
 		} while (choice != -1);
 
 	}
@@ -251,6 +254,8 @@ public class Driver {
 				return false;
 			}
 		}
+		
+		if (pw == null) return false; 
 		
 		curGraph.outputToFile(pw);
 		return true;
