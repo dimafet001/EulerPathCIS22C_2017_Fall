@@ -28,6 +28,10 @@ public class Driver {
 
 	/**
 	 * @author Mher Torjyan, Dmitry Dolgopolov
+	 * Method Name: mainMenu
+	 * Parameter: a(EulerGraph)
+	 * Description: This method provided users with a user interface and deal with their commands.
+	 * Return Value: none
 	 */
 	public static void mainMenu(EulerGraph a) { // GRAPH IS PLACEHOLDER
 		
@@ -157,7 +161,12 @@ public class Driver {
 
 	}
 	
-	/** @author Mher Torjyan */
+	/** @author Mher Torjyan
+	 * Method Name: presentOutputChoice
+	 * Parameter: in (Scanner)
+	 * Description: This method reads user's choice of how to display the graph.
+	 * Return Value: int
+	 */
 	public static int presentOutputChoices(Scanner in) {
 		System.out.println("1 : Output using Depth-First Traversal\n"
 						  +"2 : Output using Breadth-First Traversal\n"
@@ -166,10 +175,15 @@ public class Driver {
 		return in.nextInt();
 	}
 	
-	/** @author Dmitry Dolgopolov */
+	/** @author Dmitry Dolgopolov, Shiyu Zhang
+	* Method Name: chooseStartingVertex
+	 * Parameter: in Scanner
+	 * Description: This method allows users to type which city they want to start with.
+	 * Return Value: String
+	 */
 	public static String chooseStartingVertex(Scanner in) {
 //		System.out.println(curGraph.vertexSet.toString());
-		System.out.println("From where?");
+		System.out.print("\nFrom where:");
 		String ret = in.next();
 		
 		// checking if the vertex is real and exists in the Graph
@@ -180,7 +194,12 @@ public class Driver {
 		return ret;
 	}
 	
-	/** @author Shiyu Zhang, Dongbo Liu */
+	/** @author Shiyu Zhang, Dongbo Liu
+	* Method Name: fillPath
+	 * Parameter: s(Scanner), path(EulerGraph)
+	 * Description: This method reads data from input file and also add them into the Euler path.
+	 * Return Value: none
+	 */
 	static void fillPath(Scanner s, EulerGraph path) {
 		
 		path.vertexSet.clear();
@@ -191,7 +210,12 @@ public class Driver {
 		}
 	}
 
-	/** @author Shiyu Zhang, Dmitry Dolgopolov*/
+	/** @author Shiyu Zhang, Dmitry Dolgopolov
+	* Method Name: openInputFile
+	 * Parameter: none
+	 * Description: This method asks users to enter a input filename and check whether open the file successfully.
+	 * Return Value: Scanner
+	*/
 	public static Scanner openInputFile() {
 
 		String filename = null;
@@ -211,7 +235,12 @@ public class Driver {
 		return temp;
 	}
 	
-		/** @author Shiyu Zhang, Dmitry Dolgopolov */ 	
+	/** @author Shiyu Zhang, Dmitry Dolgopolov
+	* Method Name:outputToFile
+	 * Parameter:none
+	 * Description: This method ask user to type the output filename and also check whether it created successfully.
+	 * Return Value: boolean
+	 */ 	
 	public static boolean outputToFile(){
 		//output adjTable to a file (new or old)
 		
