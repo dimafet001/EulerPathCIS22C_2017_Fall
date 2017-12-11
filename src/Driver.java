@@ -199,7 +199,7 @@ public class Driver {
 	 */
 	public static String chooseStartingVertex(Scanner in) {
 
-		System.out.println("From where?");
+		System.out.print("\nFrom where: ");
 		String ret = in.next();
 		
 		// checking if the vertex is real and exists in the Graph
