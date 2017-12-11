@@ -201,15 +201,12 @@ public class Driver {
 		return in.nextInt();
 	}
 	
-	/** @author Dmitry Dolgopolov 
+	/** @author Dmitry Dolgopolov, Shiyu Zhang
 	 *  This method gets the object of a starting vertex and checks if it exists
 	 */
 	public static String chooseStartingVertex(Scanner in) {
 
-		System.out.println("From where? (ex. below)");
-		
-		
-		
+		System.out.print("\nFrom where: ");
 		String ret = in.next();
 		
 		// checking if the vertex is real and exists in the Graph
@@ -287,6 +284,7 @@ public class Driver {
 		return true;
 	}
 	
+	/** author Dmitry Dolgopolov */
 	public static boolean outputStrToFile(String str){
 		
 		// Trying to open the file
