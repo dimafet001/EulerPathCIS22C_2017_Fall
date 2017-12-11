@@ -3,7 +3,7 @@ import java.util.Map.Entry;
 import java.util.Stack;
 
 /**
- * @author Dolgopolov Dmitry, Mher Torjyan
+ * @author Dolgopolov Dmitry, Mher Torjyan, Shiyu Zhang
  *
  * @param <E
  *            extends Comparable<E>>
