@@ -111,12 +111,6 @@ public class EulerGraph<E extends Comparable<E>> extends Graph<E> {
 		}
 
 		LList<Pair> adjList = new LList();
-		// for (int i = 0; i < numVertex; i++) {
-		// adjQueue[i] = new LinkedQueue<Pair>();
-		// }
-
-		int innerCounter = 0;
-		int outerCounter = 0;
 
 		Iterator<Entry<E, Vertex<E>>> newIter = vertexSet.entrySet().iterator();
 		while (newIter.hasNext()) {
@@ -133,6 +127,8 @@ public class EulerGraph<E extends Comparable<E>> extends Graph<E> {
 			}
 
 		}
+		
+		
 
 		LinkedQueue<E> finalPath = new LinkedQueue<>();
 		// finalPath = findPath(adjList, startVertex.getKey(), finalPath);
@@ -145,68 +141,14 @@ public class EulerGraph<E extends Comparable<E>> extends Graph<E> {
 
 	}
 
-	/*
-	 * private String findPath(LList<Pair> input, E curVertex, LinkedQueue<E> path)
-	 * {
-	 * 
-	 * System.out.println("---------------------SOLUTION---------------------");
-	 * System.out.println("CURRENT VERTEX: " + curVertex); for (int i = 1; i <
-	 * input.getLength()+1; i++) { System.out.println("First: " +
-	 * input.getEntry(i).first + " " + input.getEntry(i).second); }
-	 * 
-	 * if (input.getLength() == 0) { return ""; } else { for (int i = 1; i <
-	 * input.getLength()+1; i++) { if (curVertex.equals(input.getEntry(i).first)) {
-	 * curVertex = (E) input.getEntry(i).second; path.enqueue(curVertex);
-	 * input.remove(i); return curVertex.toString()+ " " + findPath(input,
-	 * curVertex, path) ; } else if (curVertex.equals(input.getEntry(i).second)) {
-	 * curVertex = (E) input.getEntry(i).first; path.enqueue(curVertex);
-	 * input.remove(i); return curVertex.toString() + " "+ findPath(input,
-	 * curVertex, path); } } } return ""; }
-	 */
+
 	private String findPath(LList<Pair> input, E curVertex, LinkedQueue<E> path, int totalEdgeNumber) {
-
-		System.out.println("---------------------SOLUTION---------------------");
-		System.out.println("CURRENT VERTEX: " + curVertex);
-		for (int i = 1; i < input.getLength() + 1; i++) {
-			System.out.println("First: " + input.getEntry(i).first + " " + input.getEntry(i).second);
+		
+		for(int i = 0 ; i < input.getLength() ; i++) {
+			System.out.println(input.getEntry(i).first + " " + input.getEntry(i).second);
 		}
-
-		if (input.getLength() == 0 && path.size() == totalEdgeNumber - 1) {
-			return curVertex.toString();
-		} else {
-			for (int i = 1; i < input.getLength() + 1; i++) {
-				if (curVertex.equals(input.getEntry(i).first)) {
-					curVertex = (E) input.getEntry(i).second;
-					path.enqueue(curVertex);
-					// input.remove(i);
-					String res = findPath(input, curVertex, path, totalEdgeNumber);
-					if (res != null) {
-						return curVertex.toString() + " " + findPath(input, curVertex, path, totalEdgeNumber);
-					} else {
-						Pair tempP = input.getEntry(i);
-						input.remove(i);
-						input.add(input.getLength(),tempP);
-						path.dequeue();
-						return findPath(input, curVertex, path, totalEdgeNumber);
-					}
-				} else if (curVertex.equals(input.getEntry(i).second)) {
-					curVertex = (E) input.getEntry(i).first;
-					path.enqueue(curVertex);
-					//input.remove(i);
-					String res = findPath(input, curVertex, path, totalEdgeNumber);
-					if (res != null) {
-						return curVertex.toString() + " " + findPath(input, curVertex, path, totalEdgeNumber);
-					} else {
-						Pair tempP = input.getEntry(i);
-						input.remove(i);
-						input.add(input.getLength(), tempP);
-						path.dequeue();
-						return findPath(input, curVertex, path, totalEdgeNumber);
-					}
-				}
-			}
-			return null;
-		}
+		
+		return "";
 
 	}
 
