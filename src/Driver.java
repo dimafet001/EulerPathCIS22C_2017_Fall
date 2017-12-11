@@ -34,11 +34,8 @@ public class Driver {
 		
 		// setting up the Graph object
 		curGraph = new EulerGraph<String>();
-		userScanner = openInputFile();
-		if(userScanner != null) {
-			fillPath(userScanner, curGraph);
-			mainMenu(curGraph);
-		}
+		fillPath(openInputFile(), curGraph);
+		mainMenu(curGraph);
 		
 	}
 
@@ -310,6 +307,7 @@ public class Driver {
 		
 		// outputting to file
 		pw.println(str);
+		pw.close();
 		
 		return true;
 	}

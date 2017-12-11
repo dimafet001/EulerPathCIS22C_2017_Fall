@@ -131,14 +131,15 @@ public class EulerGraph<E extends Comparable<E>> extends Graph<E> {
 		iter = vertexSet.entrySet().iterator();
 		while (iter.hasNext()) { //While there is another vertex
 			//To iterate over the adjency list of the vertex
-			Entry<E, Vertex<E>> a = iter.next(); 
+			Entry<E, Vertex<E>> a = iter.next();
 			if (a.getValue().adjList.size() % 2 != 0) { //To check if odd degree. 
 				numOddVertexes++;
 				//set starting vertex
-				startVertex = a; 
+				startVertex = a;
 			}
 		}
 
+		System.out.println("odd"+numOddVertexes);
 		//EULERIAN PATH MUST HAVE 0 OR 2 ODD DEGREE VERTECIES TO BE SOLVABLE
 		if (numOddVertexes != 0 && numOddVertexes != 2)
 			return null;
@@ -168,6 +169,11 @@ public class EulerGraph<E extends Comparable<E>> extends Graph<E> {
 
 		//Stack to store the final path
 		Stack<E> finalPath = new Stack<>();
+		System.out.println("yay");
+		System.out.println(adjList);
+		System.out.println(startVertex.getKey());
+		System.out.println(finalPath);
+		System.out.println(adjList.getLength());
 		
 		return findPath(adjList, startVertex.getKey(), finalPath, adjList.getLength(), false);
 	}
