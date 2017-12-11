@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 /**
 
- *  -Name of program : Final Project
+ *  -Name of program : Final Project. Euler Path with the Flights Data
 
       -Programmer's name: Dmitry Dolgopolov (main and EulerGraph work, output), Shiyu Zhang (input), 
  * 			Mher Torjyan (menu and Graph work , output), Dongbo Liu(miscellaneous help)
@@ -161,14 +161,17 @@ public class Driver {
 				
 				String result = curGraph.findEulerPath();
 				if (result == null)
-					System.out.println("Graph is not solvable.");
+					System.out.println("Graph is not solvable.\n");
 				else {
 					System.out.println(result);
 					System.out.println("Do you want to output the Euler path to a file as well? (Y/N)");
 					
 					String response = userScanner.next();
 					if (response.equals("Y") || response.equals("y")) {
-						outputStrToFile(result);
+						if (outputStrToFile(result)) 
+							System.out.println("See in the file");
+						else 
+							System.out.println("Couldn't output");
 					} else {
 						System.out.println("As you wish");
 					}
@@ -679,6 +682,7 @@ Do you want to output the Euler path to a file as well? (Y/N)
 Y
 Where do you want to output it? (Ex. output.txt [is a file in the project])
 input1OUTPUT.txt
+See in the file
 Welcome to Euler's Algorithm 
 -1 : Exit.
 1 : Add a New Flight to the Graph. (You are not allowed to enter existing connections)
@@ -872,8 +876,8 @@ Goodbye.
 
 
 Please enter the input file name: (Ex. input1.txt)
-DOES NOT EXIST.txt
-DOES (No such file or directory)
+DOES_NOT_EXIST.txt
+DOES_NOT_EXIST.txt (No such file or directory)
 
 */
  

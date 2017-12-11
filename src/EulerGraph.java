@@ -139,9 +139,8 @@ public class EulerGraph<E extends Comparable<E>> extends Graph<E> {
 			}
 		}
 
-		System.out.println("odd"+numOddVertexes);
-		//EULERIAN PATH MUST HAVE 0 OR 2 ODD DEGREE VERTECIES TO BE SOLVABLE
-		if (numOddVertexes != 0 && numOddVertexes != 2)
+		//EULERIAN PATH MUST HAVE 1 OR 2 ODD DEGREE VERTECIES TO BE SOLVABLE
+		if (numOddVertexes != 1 && numOddVertexes != 2)
 			return null;
 
 		//To save Edge
@@ -169,11 +168,6 @@ public class EulerGraph<E extends Comparable<E>> extends Graph<E> {
 
 		//Stack to store the final path
 		Stack<E> finalPath = new Stack<>();
-		System.out.println("yay");
-		System.out.println(adjList);
-		System.out.println(startVertex.getKey());
-		System.out.println(finalPath);
-		System.out.println(adjList.getLength());
 		
 		return findPath(adjList, startVertex.getKey(), finalPath, adjList.getLength(), false);
 	}
