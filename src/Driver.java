@@ -29,8 +29,7 @@ public class Driver {
 	/**
 	 * @author Mher Torjyan, Dmitry Dolgopolov
 	 * 
-	 * This method shows the meny and calls the methods on different 
-	 * manipulations of the user
+	 * This method provided users with a user interface and deal with their commands.
 	 */
 	public static void mainMenu(EulerGraph a) { // GRAPH IS PLACEHOLDER
 		
@@ -151,7 +150,8 @@ public class Driver {
 				if (result == null)
 					System.out.println("Graph is not solvable.");
 				else {
-					System.out.println("Do you want to output the Euler path to a file as well?");
+					System.out.println(result);
+					System.out.println("Do you want to output the Euler path to a file as well? (Y/N)");
 					
 					String response = userScanner.next();
 					if (response.equals("Y") || response.equals("y")) {
@@ -180,7 +180,12 @@ public class Driver {
 
 	}
 	
-	/** @author Mher Torjyan */
+	/** @author Mher Torjyan
+	 * Method Name: presentOutputChoice
+	 * Parameter: in (Scanner)
+	 * Description: This method reads user's choice of how to display the graph.
+	 * Return Value: int
+	 */
 	public static int presentOutputChoices(Scanner in) {
 		System.out.println("1 : Output using Depth-First Traversal\n"
 				+ "2 : Output using Breadth-First Traversal\n"
@@ -219,7 +224,12 @@ public class Driver {
 		}
 	}
 
-	/** @author Shiyu Zhang, Dmitry Dolgopolov*/
+	/** @author Shiyu Zhang, Dmitry Dolgopolov
+	* Method Name: openInputFile
+	 * Parameter: none
+	 * Description: This method asks users to enter a input filename and check whether open the file successfully.
+	 * Return Value: Scanner
+	*/
 	public static Scanner openInputFile() {
 
 		String filename = null;
@@ -252,7 +262,7 @@ public class Driver {
 		PrintWriter pw = null;
 		try {
 			//"/Users/dimafet/Documents/workspace/EulerPathCIS22C_2017_Fall/output.txt"
-			System.out.println("Where do you want to output it? (Ex. output.txt [a file in the project])");
+			System.out.println("Where do you want to output it? (Ex. output.txt [is a file in the project])");
 			pw = new PrintWriter(userScanner.next());
 		} catch (FileNotFoundException e) {
 			System.out.println("File Not Found. Canceling");
@@ -273,7 +283,7 @@ public class Driver {
 		PrintWriter pw = null;
 		try {
 			//"/Users/dimafet/Documents/workspace/EulerPathCIS22C_2017_Fall/output.txt"
-			System.out.println("Where do you want to output it? (Ex. output.txt [a file in the project])");
+			System.out.println("Where do you want to output it? (Ex. output.txt [is a file in the project])");
 			pw = new PrintWriter(userScanner.next());
 		} catch (FileNotFoundException e) {
 			System.out.println("File Not Found. Canceling");

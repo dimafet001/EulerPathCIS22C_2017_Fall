@@ -3,10 +3,10 @@ import java.util.Map.Entry;
 import java.util.Stack;
 
 /**
- * @author Dolgopolov Dmitry, Mher Torjyan
+ * @author Dolgopolov Dmitry, Mher Torjyan, 
+ * 	Dongbo Liu (the original file for the presentation was made by him)
  *
- * @param <E
- *            extends Comparable<E>>
+ * @param <E extends Comparable<E>>
  */
 
 public class EulerGraph<E extends Comparable<E>> extends Graph<E> {
