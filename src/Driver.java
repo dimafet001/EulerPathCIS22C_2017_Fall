@@ -27,7 +27,7 @@ public class Driver {
 	}
 
 	/**
-	 * @author Mher Torjyan, Dmitry Dolgopolov
+	 * @author Mher Torjyan, Dmitry Dolgopolov, Shiyu Zhang
 	 * 
 	 * This method provided users with a user interface and deal with their commands.
 	 */
@@ -194,7 +194,7 @@ public class Driver {
 		return in.nextInt();
 	}
 	
-	/** @author Dmitry Dolgopolov 
+	/** @author Dmitry Dolgopolov, Shiyu Zhang
 	 *  This method gets the object of a starting vertex and checks if it exists
 	 */
 	public static String chooseStartingVertex(Scanner in) {
