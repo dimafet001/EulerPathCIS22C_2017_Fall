@@ -142,12 +142,14 @@ public class EulerGraph<E extends Comparable<E>> extends Graph<E> {
 		// while (!finalPath.isEmpty()) {
 		// System.out.println(finalPath.dequeue());
 		// }
-		System.out.println(strPath);
+		System.out.println(finalPath);
 
 	}
 
 	private String findPath(LList<Pair> input, E curVertex, Stack<E> path, int totalEdgeNumber) {
 
+		String resString = "";
+		
 		System.out.println("---------------------SOLUTION---------------------");
 		System.out.println("CURRENT VERTEX: " + curVertex);
 		for (int i = 1; i < input.getLength() + 1; i++) {
@@ -156,27 +158,31 @@ public class EulerGraph<E extends Comparable<E>> extends Graph<E> {
 		
 		
 		if (input.getLength() == 0 && path.size() == totalEdgeNumber - 1 ) {
-//			return curVertex.toString();
-			return "";
+			return curVertex.toString();
 		} else {
 			for (int i = 1; i < input.getLength() + 1; i++) {
 				if (curVertex.equals(input.getEntry(i).first)) {
+					String realCurVertex = curVertex.toString();
 					curVertex = (E) input.getEntry(i).second;
 					path.push(curVertex);
 					input.remove(i);
-					return curVertex.toString() + " " + findPath(input, curVertex, path, totalEdgeNumber);
+					resString = realCurVertex + " " + findPath(input, curVertex, path, totalEdgeNumber);
+					return resString;
 				} else if (curVertex.equals(input.getEntry(i).second)) {
+					String realCurVertex = curVertex.toString();
 					curVertex = (E) input.getEntry(i).first;
 					path.push(curVertex);
 					input.remove(i);
-					return curVertex.toString() + " " + findPath(input, curVertex, path, totalEdgeNumber);
+					resString = realCurVertex + " " + findPath(input, curVertex, path, totalEdgeNumber);
+					return resString;
 				}
 			}
 			// here we didn't hit a dead end
 			path.pop();
 			input.add(new Pair(curVertex, path.peek()));
 			curVertex = path.pop();
-			return findPath(input, curVertex, path, totalEdgeNumber);
+			resString = findPath(input, curVertex, path, totalEdgeNumber);
+			return resString;
 		}
 	}
 
