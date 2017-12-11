@@ -89,8 +89,11 @@ public class EulerGraph<E extends Comparable<E>> extends Graph<E> {
 
 	}
 
-	/** @author Mher Torjyan */
-	public void findEulerPath() { // find Euler path using fleury algorithm
+	/** @author Mher Torjyan
+	 * This method returns the Euler path that goes through all
+	 * 	edges in form of a String in format "A-B-C-D-B" 
+	 *  */
+	public String findEulerPath() { // find Euler path using fleury algorithm
 
 		int numOddVertexes = 0;
 		int numVertex = 0;
@@ -105,10 +108,8 @@ public class EulerGraph<E extends Comparable<E>> extends Graph<E> {
 				startVertex = a;
 			}
 		}
-		if (numOddVertexes != 0 && numOddVertexes != 2) {
-			System.out.println("Graph is not solvable.");
-			return;
-		}
+		if (numOddVertexes != 0 && numOddVertexes != 2)
+			return null;
 
 		LList<Pair> adjList = new LList();
 
@@ -130,13 +131,8 @@ public class EulerGraph<E extends Comparable<E>> extends Graph<E> {
 
 
 		Stack<E> finalPath = new Stack<>();
-		// finalPath = findPath(adjList, startVertex.getKey(), finalPath);
-
 		
-
-		System.out.println(findPath(adjList, startVertex.getKey(), finalPath, adjList.getLength(), false));
-
-		//System.out.println(strPath);
+		return findPath(adjList, startVertex.getKey(), finalPath, adjList.getLength(), false);
 	}
 
 	private String findPath(LList<Pair> input, E curVertex, Stack<E> path, int totalEdgeNumber, boolean isBackTracking) {

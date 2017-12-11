@@ -20,7 +20,7 @@ public class Driver {
 	
 	public static void main(String[] args) {
 		
-
+		// setting up the Graph object
 		curGraph = new EulerGraph<String>();
 		fillPath(openInputFile(), curGraph);
 		mainMenu(curGraph);
@@ -28,6 +28,9 @@ public class Driver {
 
 	/**
 	 * @author Mher Torjyan, Dmitry Dolgopolov
+	 * 
+	 * This method shows the meny and calls the methods on different 
+	 * manipulations of the user
 	 */
 	public static void mainMenu(EulerGraph a) { // GRAPH IS PLACEHOLDER
 		
@@ -59,10 +62,12 @@ public class Driver {
 				String to = userScanner.next();
 				System.out.println("How far are the two airports?");
 				double weight = userScanner.nextDouble();
+				
 				if (from.equals(to)) {
 					System.out.println("You cannot fly from-to one airport.");
 					break;
 				}
+				
 				a.addEdge(from, to, weight);
 				break;
 			case 2: 
@@ -70,23 +75,26 @@ public class Driver {
 				String remFrom = userScanner.next();
 				System.out.println("Where was the flight to?");
 				String remTo = userScanner.next();
+				
 				if (remFrom.equals(remTo)) {
 					System.out.println("Failed. Non-existent edge");
 					break;
 				}
-				if (!a.remove(remFrom, remTo)) 
-					System.out.println("Failed removing. You probably used non-existent edge");
-				else
+				if (a.remove(remFrom, remTo)) 
 					System.out.println("Successfully removed");
+				else
+					System.out.println("Failed removing. You probably used non-existent edge");
 				break;
 			case 3:
-				if(a.undo()) {
+				
+				if(a.undo())
 					System.out.println("Successfully undid last move");
-				}else {
+				else
 					System.out.println("Could not undo.");
-				}
 				break;
+				
 			case 4:
+				
 				System.out.println("1 : Display to console \n "
 								+ "2 : Output the Adjacency List to a File");
 				int sc = userScanner.nextInt();
@@ -138,10 +146,25 @@ public class Driver {
 				break;
 			case 5:
 				System.out.println();
-				curGraph.findEulerPath();
+				
+				String result = curGraph.findEulerPath();
+				if (result == null)
+					System.out.println("Graph is not solvable.");
+				else {
+					System.out.println("Do you want to output the Euler path to a file as well?");
+					
+					String response = userScanner.next();
+					if (response.equals("Y") || response.equals("y")) {
+						outputStrToFile(result);
+					} else {
+						System.out.println("As you wish");
+					}
+					
+				}
 				break;
 			case 6:
 				fillPath(openInputFile(), curGraph); 
+				System.out.println("Changed the input file");
 				break;
 			case -1:
 				System.out.println("Exiting");
@@ -160,34 +183,39 @@ public class Driver {
 	/** @author Mher Torjyan */
 	public static int presentOutputChoices(Scanner in) {
 		System.out.println("1 : Output using Depth-First Traversal\n"
-						  +"2 : Output using Breadth-First Traversal\n"
+				+ "2 : Output using Breadth-First Traversal\n"
 						  + "3 : Output Adjacency List");
 		
 		return in.nextInt();
 	}
 	
-	/** @author Dmitry Dolgopolov */
+	/** @author Dmitry Dolgopolov 
+	 *  This method gets the object of a starting vertex and checks if it exists
+	 */
 	public static String chooseStartingVertex(Scanner in) {
-//		System.out.println(curGraph.vertexSet.toString());
+
 		System.out.println("From where?");
 		String ret = in.next();
 		
 		// checking if the vertex is real and exists in the Graph
-		if (!curGraph.vertexSet.containsKey(ret)) {
+		if (!curGraph.vertexSet.containsKey(ret))
 			return null;
-		}
 		
 		return ret;
 	}
 	
-	/** @author Shiyu Zhang, Dongbo Liu */
+	/** @author Shiyu Zhang, Dongbo Liu 
+	 *	This method parses the input files into Graph instances
+	 */
 	static void fillPath(Scanner s, EulerGraph path) {
 		
+		// clearing the variables before using (always do ;) )
 		path.vertexSet.clear();
+		
+		// filling it up
 		while(s.hasNext()) {
 			String[] ar = s.nextLine().split(",");
 			path.addEdge(ar[0], ar[1], Double.parseDouble(ar[2]));
-			
 		}
 	}
 
@@ -198,9 +226,6 @@ public class Driver {
 		Scanner temp = null;
 
 		System.out.println("\nPlease enter the input file name: (Ex. input1.txt)");
-//		filename = "/Users/m_torjyan/Documents/EulerPathCIS22C_2017_Fall/input4.txt";
-	//	filename = "/Users/dimafet/Documents/workspace/EulerPathCIS22C_2017_Fall/input3.txt";
-//		filename = "input1.txt";
 		filename = userScanner.next();
 		
 		File inputFile = new File(filename);
@@ -213,7 +238,12 @@ public class Driver {
 		return temp;
 	}
 	
-		/** @author Shiyu Zhang, Dmitry Dolgopolov */ 	
+	/** @author Shiyu Zhang, Dmitry Dolgopolov
+	 * 	
+	 * 	This method outputs to an existing file or creates one and outputs there
+	 * 
+	 *  @return True if the output is successful. Otherwise False
+	 */ 	
 	public static boolean outputToFile(){
 		//output adjTable to a file (new or old)
 		
@@ -224,42 +254,36 @@ public class Driver {
 			System.out.println("Where do you want to output it? (Ex. output.txt [a file in the project])");
 			pw = new PrintWriter(userScanner.next());
 		} catch (FileNotFoundException e) {
-			System.out.println("File Not Found.\nDo you want to create a file? (Y/N)");
-			
-			String response = userScanner.next();
-			if (response.equals("Y") || response.equals("y")) {
-
-				System.out.println("Input the file name");
-				File file = new File(userScanner.next());
-
-				// Create the file
-				try {
-					if (file.createNewFile()) {
-						System.out.println("File is created!");
-					} else {
-						System.out.println("File already exists.");
-					}
-				} catch (IOException e2) {
-					System.out.println("Couldn't read file well. Aborting");
-					return false;
-				}
-				
-				
-				try {
-					pw = new PrintWriter(file);
-				} catch (FileNotFoundException e1) {
-					System.out.println("File not found. Canceling");
-					return false;
-				}
-			} else {
-				System.out.println("File not found. Canceling");
-				return false;
-			}
+			System.out.println("File Not Found. Canceling");
+			return false;
 		}
 		
 		if (pw == null) return false; 
 		
+		// outputting to file
 		curGraph.outputToFile(pw);
+		
+		return true;
+	}
+	
+	public static boolean outputStrToFile(String str){
+		
+		// Trying to open the file
+		PrintWriter pw = null;
+		try {
+			//"/Users/dimafet/Documents/workspace/EulerPathCIS22C_2017_Fall/output.txt"
+			System.out.println("Where do you want to output it? (Ex. output.txt [a file in the project])");
+			pw = new PrintWriter(userScanner.next());
+		} catch (FileNotFoundException e) {
+			System.out.println("File Not Found. Canceling");
+			return false;
+		}
+		
+		if (pw == null) return false; 
+		
+		// outputting to file
+		pw.println(str);
+		
 		return true;
 	}
 
