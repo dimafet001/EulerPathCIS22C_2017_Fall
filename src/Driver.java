@@ -8,6 +8,13 @@ import java.util.Scanner;
 /**
  * @author Dmitry Dolgopolov (main and EulerGraph work), Shiyu Zhang (data, input, output), 
  * 			Mher Torjyan (menu and Graph work)
+ * 
+ * The final exam for CIS22C in Java Fall 2017
+ * 
+ * The program stores the flights in the Graph.
+ * It can parse it from a file and output it to the file, too.
+ * Also, we can find a EulerPath (if exists) that passes thru
+ * 	all the edges once.
  *
  */
 public class Driver {
@@ -199,7 +206,10 @@ public class Driver {
 	 */
 	public static String chooseStartingVertex(Scanner in) {
 
-		System.out.println("From where?");
+		System.out.println("From where? (ex. below)");
+		
+		
+		
 		String ret = in.next();
 		
 		// checking if the vertex is real and exists in the Graph
