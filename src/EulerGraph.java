@@ -128,22 +128,57 @@ public class EulerGraph<E extends Comparable<E>> extends Graph<E> {
 
 		}
 
-		LinkedStack<E> finalPath = new LinkedStack<>();
+
+		Stack<E> finalPath = new Stack<>();
 		// finalPath = findPath(adjList, startVertex.getKey(), finalPath);
 
-		LinkedStack<Pair> trav = new LinkedStack<>();
 
-		String strPath = findPath(adjList, startVertex.getKey(), finalPath, adjList.getLength(), trav);
+		String strPath = startVertex.getKey() + " " + findPath(adjList, startVertex.getKey(), finalPath, adjList.getLength());
 
-//		while (!finalPath.isEmpty()) {
-//		?	System.out.println(finalPath.dequeue());
-//		}
+
+		// while (!finalPath.isEmpty()) {
+		// System.out.println(finalPath.dequeue());
+		// }
+		//System.out.println(strPath);
 
 		System.out.println(strPath);
 	}
 
-	private String findPath(LList<Pair> input, E startVertex, LinkedStack<E> path, int totalEdgeNumber,
-			LinkedStack<Pair> prevTravered) {
+	private String findPath(LList<Pair> input, E curVertex, Stack<E> path, int totalEdgeNumber) {
+
+		System.out.println("---------------------SOLUTION---------------------");
+		System.out.println("CURRENT VERTEX: " + curVertex);
+		for (int i = 1; i < input.getLength() + 1; i++) {
+			System.out.println("First: " + input.getEntry(i).first + " " + input.getEntry(i).second);
+		}
+		
+		
+		if (input.getLength() == 0 && path.size() == totalEdgeNumber - 1 ) {
+//			return curVertex.toString();
+			return "";
+		} else {
+			for (int i = 1; i < input.getLength() + 1; i++) {
+				if (curVertex.equals(input.getEntry(i).first)) {
+					curVertex = (E) input.getEntry(i).second;
+					path.push(curVertex);
+					input.remove(i);
+					return curVertex.toString() + " " + findPath(input, curVertex, path, totalEdgeNumber);
+				} else if (curVertex.equals(input.getEntry(i).second)) {
+					curVertex = (E) input.getEntry(i).first;
+					path.push(curVertex);
+					input.remove(i);
+					return curVertex.toString() + " " + findPath(input, curVertex, path, totalEdgeNumber);
+				}
+			}
+			// here we didn't hit a dead end
+			path.pop();
+			input.add(new Pair(curVertex, path.peek()));
+			curVertex = path.pop();
+			return findPath(input, curVertex, path, totalEdgeNumber);
+		}
+	}
+
+	/*private String findPath(LList<Pair> input, E startVertex, LinkedQueue<E> path, int totalEdgeNumber) {
 
 		System.out.println("---------------------SOLUTION---------------------");
 		
@@ -179,7 +214,7 @@ public class EulerGraph<E extends Comparable<E>> extends Graph<E> {
 			return findPath(input, (E)p.second, path, totalEdgeNumber, prevTravered);
 		}
 
-	}
+	}*/
 
 	enum Operation {
 		ADDED, REMOVED

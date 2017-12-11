@@ -7,7 +7,6 @@
    @version 4.0
    UPDATED by C. Lee-Klawender
 */
-public class LinkedStack<T> implements StackInterface<T>
 {
 	private Node topNode; // References the first node in the chain
 	private int nodeCount;
