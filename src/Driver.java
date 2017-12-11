@@ -226,6 +226,7 @@ public class Driver {
 		Scanner temp = null;
 
 		System.out.println("\nPlease enter the input file name: (Ex. input1.txt)");
+
 		filename = userScanner.next();
 		
 		File inputFile = new File(filename);

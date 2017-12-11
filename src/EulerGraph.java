@@ -3,7 +3,7 @@ import java.util.Map.Entry;
 import java.util.Stack;
 
 /**
- * @author Dolgopolov Dmitry, Mher Torjyan, Dongbo Liu
+ * @author Dolgopolov Dmitry, Mher Torjyan
  *
  * @param <E
  *            extends Comparable<E>>
@@ -51,17 +51,19 @@ public class EulerGraph<E extends Comparable<E>> extends Graph<E> {
 		// iterating thru the adjList of the Vertex
 		// so that we can get the weight (the only way)
 		while (iter.hasNext()) {
+			//Save the current entry 
 			Entry<E, Pair<Vertex<E>, Double>> entry = iter.next();
+			//If the current Entry is equal save weight of edge.
 			if (entry.getValue().first.data.equals(dest)) {
 				weight = entry.getValue().second;
 				break;
 			}
 		}
-
+		//Add to steps for Undo
 		if (!justUndid)
 			steps.add(new Step<E>(src, dest, weight, Operation.REMOVED));
 		justUndid = false;
-
+		//Call remove in Remove class
 		return super.remove(src, dest);
 	}
 
@@ -79,8 +81,10 @@ public class EulerGraph<E extends Comparable<E>> extends Graph<E> {
 		Step<E> lastStep = steps.pop();
 
 		// if we added we remove and viceversa
+		//if previous mode was add
 		if (lastStep.getOperation().equals(Operation.ADDED))
 			return remove(lastStep.getSrc(), lastStep.getDst());
+		//if previous move was remove
 		else if (lastStep.getOperation().equals(Operation.REMOVED)) {
 			addEdge(lastStep.getSrc(), lastStep.getDst(), lastStep.getWeight());
 		}
@@ -95,65 +99,87 @@ public class EulerGraph<E extends Comparable<E>> extends Graph<E> {
 	 *  */
 	public String findEulerPath() { // find Euler path using fleury algorithm
 
+		//Count number of odd degree vertecies
 		int numOddVertexes = 0;
-		int numVertex = 0;
+		//Iterator for Vertexes
 		Iterator<Entry<E, Vertex<E>>> iter;
+		//To save the start Vertex which HAS to be of odd degree if one exists
 		Entry<E, Vertex<E>> startVertex = null;
 		iter = vertexSet.entrySet().iterator();
-		while (iter.hasNext()) {
-			numVertex++;
-			Entry<E, Vertex<E>> a = iter.next();
-			if (a.getValue().adjList.size() % 2 != 0) {
+		while (iter.hasNext()) { //While there is another vertex
+			//To iterate over the adjency list of the vertex
+			Entry<E, Vertex<E>> a = iter.next(); 
+			if (a.getValue().adjList.size() % 2 != 0) { //To check if odd degree. 
 				numOddVertexes++;
-				startVertex = a;
+				//set starting vertex
+				startVertex = a; 
 			}
 		}
+
+		//EULERIAN PATH MUST HAVE 0 OR 2 ODD DEGREE VERTECIES TO BE SOLVABLE
 		if (numOddVertexes != 0 && numOddVertexes != 2)
 			return null;
 
+		//To save Edge
 		LList<Pair> adjList = new LList();
 
 		Iterator<Entry<E, Vertex<E>>> newIter = vertexSet.entrySet().iterator();
 		while (newIter.hasNext()) {
+			
 			Entry<E, Vertex<E>> vertex = newIter.next();
 			// System.out.println(vertex.getKey());
 			Iterator<Entry<E, Pair<Vertex<E>, Double>>> newIter2 = vertex.getValue().iterator();
 			while (newIter2.hasNext()) {
 				Entry<E, Pair<Vertex<E>, Double>> entry = newIter2.next();
 				// System.out.println(entry.getKey());
+				//To save only one of the edge from one vertex to another
 				if (vertex.getKey().compareTo(entry.getKey()) < 0) {
+					//Save as Pair
 					Pair toAdd = new Pair(vertex.getKey(), entry.getKey());
+					//Add to List
 					adjList.add(toAdd);
 				}
 			}
 
 		}
 
-
+		//Stack to store the final path
 		Stack<E> finalPath = new Stack<>();
 		
 		return findPath(adjList, startVertex.getKey(), finalPath, adjList.getLength(), false);
 	}
-
+	
+	//Recursive Method which computes Euler Path
 	private String findPath(LList<Pair> input, E curVertex, Stack<E> path, int totalEdgeNumber, boolean isBackTracking) {
-
+		//Final return string
 		String resString = "";
+		//Temp String to store in between calls before overriding curVertex
 		String realCurVertex = "";
 		
+		//base case
 		if (input.getLength() == 0 && path.size() == totalEdgeNumber - 1 ) {
 			return curVertex.toString();
 		} else {
 			for (int i = 1; i < input.getLength() + 1; i++) {
+				//If equal to first element of Pair
 				if (curVertex.equals(input.getEntry(i).first)) {
+					//if backtracking DO NOT update realCurVertex
 					if(!isBackTracking) {
+						//Save before override
 						realCurVertex = curVertex.toString();
 					}
+					//Update curVertex to new position
 					curVertex = (E) input.getEntry(i).second;
+					//Add curVertex to the path
 					path.push(curVertex);
+					//Remove edge
 					input.remove(i);
+					//String to return 
 					resString = realCurVertex + (!isBackTracking ? "-" : "") + findPath(input, curVertex, path, totalEdgeNumber, false);
 					return resString;
-				} else if (curVertex.equals(input.getEntry(i).second)) {
+				} //If equal to second element of Pair
+				else if (curVertex.equals(input.getEntry(i).second)) {
+					//if backtracking DO NOT update realCurVertex
 					if(!isBackTracking) {	
 						realCurVertex = curVertex.toString();
 						
@@ -169,9 +195,11 @@ public class EulerGraph<E extends Comparable<E>> extends Graph<E> {
 			}
 			// here we hit a dead end
 			path.pop();
+			//Add back to input list
 			input.add(new Pair(curVertex, path.peek()));
+			//Set curVertex to Previous
 			curVertex = path.pop();
-			
+			//Recussive Step
 			return findPath(input, curVertex, path, totalEdgeNumber, true) ;
 			//return resString;
 		}
