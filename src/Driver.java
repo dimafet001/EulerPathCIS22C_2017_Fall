@@ -282,7 +282,6 @@ public class Driver {
 		// Trying to open the file
 		PrintWriter pw = null;
 		try {
-			//"/Users/dimafet/Documents/workspace/EulerPathCIS22C_2017_Fall/output.txt"
 			System.out.println("Where do you want to output it? (Ex. output.txt [is a file in the project])");
 			pw = new PrintWriter(userScanner.next());
 		} catch (FileNotFoundException e) {
